@@ -1,6 +1,5 @@
 """Imager models."""
 
-
 from django.db import models
 from django.contrib.auth.models import User
 import uuid
@@ -12,7 +11,7 @@ from django.dispatch import receiver
 
 
 class ImagerProfile(models.Model):
-    """The Library Patron and All Of Its Attributes."""
+    """The Imager user and attributes."""
 
     user = models.OneToOneField(
         User,
