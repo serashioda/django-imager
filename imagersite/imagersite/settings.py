@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'imagersite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'django_lender',
+        'NAME': 'django_imager',
         'USER': os.environ["PSQL_USERNAME"],
         'HOST': '127.0.0.1',
         'PORT': '5432',
