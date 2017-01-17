@@ -29,7 +29,7 @@ class ImagerProfile(models.Model):
     phone = models.CharField(max_length=50, blank=True, null=True)
     photo_type = models.CharField(max_length=50, blank=True, null=True)
     is_active = models.BooleanField(default=True)
-    user_id = models.UUIDField(default=uuid.uuid4, editable=False)
+    imager_id = models.UUIDField(default=uuid.uuid4, editable=False)
 
 
 @receiver(post_save, sender=User)
