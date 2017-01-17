@@ -1,9 +1,12 @@
+"""Imager models."""
+
+
 from django.db import models
 from django.contrib.auth.models import User
 import uuid
 
-from django.db.models.signals import post_save  # <-- after saving a thing, do a thing
-from django.dispatch import receiver  # <-- listen for a thing to be done
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Create your models here.
 
@@ -21,10 +24,12 @@ class ImagerProfile(models.Model):
     bio = models.TextField()
     personal_website = models.UrlField(max_length=200)
     hireable = models.BooleanField(default=True)
-    travel_radius = models.DecimalField(max_digits=8, decimal_places=2, null=True)
+    travel_radius = models.DecimalField(
+        max_digits=8, decimal_places=2, null=True)
     phone = models.CharField(max_length=50, blank=True, null=True)
     photo_type = models.CharField(max_length=50, blank=True, null=True)
     is_active = models.BooleanField(default=True)
+    imager_id = models.UUIDField(default=uuid.uuid4, editable=False)
 
 
 @receiver(post_save, sender=User)
