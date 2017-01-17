@@ -22,7 +22,7 @@ class ImagerProfile(models.Model):
     camera_type = models.CharField(max_length=255, blank=True, null=True)
     address = models.CharField(max_length=255, blank=True, null=True)
     bio = models.TextField()
-    personal_website = models.UrlField(max_length=200)
+    personal_website = models.URLField(max_length=200)
     hireable = models.BooleanField(default=True)
     travel_radius = models.DecimalField(
         max_digits=8, decimal_places=2, null=True)
