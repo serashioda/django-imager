@@ -31,7 +31,8 @@ class ProfileTestCase(TestCase):
         Ensure that each of your models has a string representation that
         appropriately displays it when using the Django shell.
         """
-        pass
+        for i in range(20):
+            self.assertIs(self.users[i].username, str(self.users[i]))
 
     def test_user_gets_imgr_profile(self):
         """Test User gets Imager Profile.
@@ -39,14 +40,25 @@ class ProfileTestCase(TestCase):
         Ensure that every standard Django user object created automatically
         gets an ImagerProfile.
         """
-        user = self.users[0]
-        self.assertTrue(hasattr(user, 'profile'))
-        self.assertIsInstance(user.profile, ImagerProfile)
+        for i in range(20):
+            user = self.users[i]
+            self.assertTrue(hasattr(user, 'profile'))
+            self.assertIsInstance(user.profile, ImagerProfile)
 
-    def test_del_user_on_db_and_imgr(self):
+    def test_del_user_on_db_and_profile(self):
         """Test delete user on DB & Imgr.
 
         Ensure that if a user is deleted from the database, the ImagerProfile
         associated with that user is also deleted.
         """
         pass
+
+    def test_imager_profile_is_active(self):
+        """Test profile is active."""
+        pass
+
+    def test_profile_is_active_is_active(self):
+        """Test profile.is_active is active."""
+        for i in range(20):
+            user = self.users[i]
+            self.assertTrue(user.is_active)
