@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'imager_profile',   
+    'imager_profile',
 ]
 
 MIDDLEWARE = [
@@ -77,8 +77,8 @@ WSGI_APPLICATION = 'imagersite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Sera',
-        'USER': 'django_imager',
+        'NAME': 'django_lender',
+        'USER': os.environ["PSQL_USERNAME"],
         'HOST': '127.0.0.1',
         'PORT': '5432',
         'TEST': {
