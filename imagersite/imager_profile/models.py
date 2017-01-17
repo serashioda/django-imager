@@ -1,18 +1,35 @@
 from django.db import models
+from django.contrib.auth.models import User
+import uuid
+
+from django.db.models.signals import post_save  # <-- after saving a thing, do a thing
+from django.dispatch import receiver  # <-- listen for a thing to be done
 
 # Create your models here.
 
-class User(AbstractUser):
-    """."""
 
-class Meta(AbstractUser.Meta):
-    swappable = 'AUTH_USER_MODEL'
+class ImagerProfile(models.Model):
+    """The Library Patron and All Of Its Attributes."""
 
-class AbstractUser(AbstractBaseUser, PermissionsMixin):
+    user = models.OneToOneField(
+        User,
+        related_name="profile",
+        on_delete=models.CASCADE
+    )
+    camera_type = models.CharField(max_length=255, blank=True, null=True)
+    address = models.CharField(max_length=255, blank=True, null=True)
+    bio = models.TextField()
+    personal_website = models.UrlField(max_length=200)
+    hireable = models.BooleanField(default=True)
+    travel_radius = models.DecimalField(max_digits=8, decimal_places=2, null=True)
+    phone = models.CharField(max_length=50, blank=True, null=True)
+    photo_type = models.CharField(max_length=50, blank=True, null=True)
+    is_active = models.BooleanField(default=True)
+
+
+@receiver(post_save, sender=User)
+def make_profile_for_user(sender, instance, **kwargs):
     """."""
-    username = models.CharField(
-        _('username'),
-        max_length=30,
-        unique=True,
-        help_text=_('Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only.')
-        )
+    new_profile = ImagerProfile(user=instance)
+    new_profile.is_active = True
+    new_profile.save()
