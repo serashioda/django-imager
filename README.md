@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/serashioda/django-imager.svg?branch=master)](https://travis-ci.org/serashioda/django-imager)
+
 # Django Imager
 
 by [Sera Smith](https://github.com/serashioda) and [Ben Petty](https://github.com/benpetty)
