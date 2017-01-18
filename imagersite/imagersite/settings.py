@@ -25,7 +25,10 @@ SECRET_KEY = '8%#4ga*0pn56=k6tlz+s5^zf#i&rykywoz2l(5)o-$6fd*um*n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+]
 
 
 # Application definition
@@ -39,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'imager_profile',
     'bootstrap3',
+    'imagersite',
 ]
 
 MIDDLEWARE = [
