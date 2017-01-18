@@ -4,10 +4,11 @@ by [Sera Smith](https://github.com/serashioda) and [Ben Petty](https://github.co
 
 ## Tools
 
-- Python
-- Django
-- PostgreSQL
-- Psycopg2
+- Python (https://www.python.org/)
+- Django (https://www.djangoproject.com/)
+- PostgreSQL (https://www.postgresql.org/)
+- Psycopg2 (http://initd.org/psycopg/)
+- Django-Bootstrap3 (https://github.com/dyve/django-bootstrap3)
 
 ## Models
 
