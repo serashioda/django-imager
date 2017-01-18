@@ -9,9 +9,12 @@ from django.dispatch import receiver
 
 # Create your models here.
 
-
+@python_2_unicode_compatible
 class ImagerProfile(models.Model):
     """The Imager user and attributes."""
+
+    objects = models.Manager()
+    active = ActiveProfileManager()
 
     user = models.OneToOneField(
         User,
@@ -30,6 +33,14 @@ class ImagerProfile(models.Model):
     is_active = models.BooleanField(default=True)
     imager_id = models.UUIDField(default=uuid.uuid4, editable=False)
 
+    @property
+    def is_active(self):
+        """."""
+        return self.user.is_active
+
+    def __str__(self):
+        """."""
+        return "User: {}, Camera: {}, Address: {}, Phone Number: {}, For Hire? {},  Photography Type: {}, Active? {}, Personal Website: {}, About: {}"
 
 @receiver(post_save, sender=User)
 def make_profile_for_user(sender, instance, **kwargs):
