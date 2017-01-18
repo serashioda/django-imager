@@ -59,5 +59,5 @@ class ImagerProfile(models.Model):
 def make_profile_for_user(sender, instance, **kwargs):
     """."""
     new_profile = ImagerProfile(user=instance)
-    new_profile.is_active = True
+    # new_profile.is_active = True
     new_profile.save()
