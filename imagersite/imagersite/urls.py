@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^$', views.home_view, name='home'),
     url(r'^registration/', include("registration.backends.hmac.urls")),
     url(r'^login$', login, name='login')
+    url(r'^login$', login, name='logout')
 ]
