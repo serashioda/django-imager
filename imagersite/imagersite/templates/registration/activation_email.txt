@@ -1,1 +1,7 @@
-Welcome to Imager, yo!
+{% load in %}
+{% trans "Click here to activate your profile!" %} {{ site.name }}:
+
+Activate account: {{ site }}{% url 'registration_activate' activation_key %}
+
+{% blocktrans %}This activation key link is valid for {{ expiration_days }} days. Activate now!{% endblocktrans %}
+

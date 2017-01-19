@@ -15,14 +15,21 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+# from django.contrib.auth.views import login, logout
+from django.contrib.auth import views as auth_views
+from django.conf import settings
+from django.conf.urls.static import static
+
 from imagersite import views
-from django.contrib.auth.views import login, logout
 
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
     url(r'^$', views.home_view, name='home'),
-    url(r'^registration/', include("registration.backends.hmac.urls")),
-    url(r'^login$', login, name='login'),
-    url(r'^login$', logout, name='logout')
+    url(r'^accounts/', include('registration.backends.hmac.urls')),
+    url(r'^login/', auth_views.login, name='login'),
+    url(r'^logout/', auth_views.logout, {'next_page': '/'}, name='logout'),
+    url(r'^admin/', admin.site.urls),
+    url(r'^profile/', include('imager_profile.urls'))
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
