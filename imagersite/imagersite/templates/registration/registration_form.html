@@ -4,8 +4,10 @@
 
 {% block body %}
 
+<form method="POST">
 {% csrf_token %}
 {{ form.as_table }}
 <button>Register</button>
+</form>
 
 {% endblock %}
