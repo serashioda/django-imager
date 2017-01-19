@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'imager_profile',
     'bootstrap3',
-    'imager_images',
+    # 'imager_images',
     'imagersite',
 ]
 
@@ -84,7 +84,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'django_imager',
-        'USER': os.environ['USERNAME', ''],
+        'USER': os.environ['USERNAME'],
         'HOST': '127.0.0.1',
         'PORT': '5432',
         'TEST': {
