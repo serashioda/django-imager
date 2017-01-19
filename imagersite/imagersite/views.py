@@ -1,10 +1,10 @@
-"""Sites root base."""
+"""Views."""
 
 from django.shortcuts import render
 
-
 # Create your views here.
 
+
 def home_view(request):
-    """The home view."""
-    return render(request, "imagersite/base.html", {"": ""})
+    """Home view."""
+    return render(request, 'imagersite/home.html')

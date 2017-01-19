@@ -1,1 +1,2 @@
-Welcome to Imager
+Account Activation for {{ site }}. Welcome to Imager!
+
