@@ -1,5 +1,7 @@
 # Django Imager
 
+A simple image management app using Django.
+
 by [Sera Smith](https://github.com/serashioda) and [Ben Petty](https://github.com/benpetty)
 
 ## Tools
@@ -8,6 +10,8 @@ by [Sera Smith](https://github.com/serashioda) and [Ben Petty](https://github.co
 - Django
 - PostgreSQL
 - Psycopg2
+- factory-boy
+_ Faker
 
 ## Models
 
