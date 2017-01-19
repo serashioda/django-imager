@@ -1,11 +1,11 @@
 {% extends "../imagersite/base.html" %}
 
-{% block title %}Registration{% endblock %}
+{% block title %}Login{% endblock %}
 
 {% block body %}
 
 {% csrf_token %}
 {{ form.as_table }}
-<button>Register</button>
+<button>Login</button>
 
 {% endblock %}

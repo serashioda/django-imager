@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Imager</title>
+  <title>{% block title %}Home{% endblock %} - Imager</title>
 
 {% load bootstrap3 %}
 {% bootstrap_css %}
@@ -10,10 +10,22 @@
 {% bootstrap_messages %}
 </head>
 <body>
+  <header class="header">
   <h1>ImagerSite</h1>
+  </header>
+
+    <nav>
     <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
         <li><a href="{% url 'registration_register' %}">Register</a></li>
         <li><a href="{% url 'login' %}">Log In</a></li>
     </ul>
+    </nav>
+
+    <div>
+    {% block body %}
+    {% endblock %}
+    </div>
+
 </body>
 </html>
