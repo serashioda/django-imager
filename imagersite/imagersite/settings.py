@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'imager_profile',
+    'imager_images',
+    'imagersite',
 ]
 
 MIDDLEWARE = [
@@ -78,7 +80,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'django_imager',
-        'USER': os.environ["PSQL_USERNAME"],
+        'USER': os.environ['USERNAME', ''],
         'HOST': '127.0.0.1',
         'PORT': '5432',
         'TEST': {
@@ -125,3 +127,20 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+LOGIN_REDIRECT_URL = 'home'
+
+ACCOUNT_ACTIVATION_DAYS = 7
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = 'imager@gmail.com'
+EMAIL_HOST_PASSWORD = 'notthatpassword'
+DEFAULT_FROM_EMAIL = 'imager@gmail.com'
+
+# if DEBUG:
+#     EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'MEDIA')
+MEDIA_URL = "/media/"
