@@ -1,12 +1,13 @@
 """Imager models."""
 
 from django.db import models
+from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 from django.utils.encoding import python_2_unicode_compatible
-import uuid
-
-from django.db.models.signals import post_save
 from django.dispatch import receiver
+
+from phonenumber_field.modelfields import PhoneNumberField
+import uuid
 
 # Create your models here.
 
@@ -45,7 +46,6 @@ class ImagerProfile(models.Model):
     travel_radius = models.DecimalField(max_digits=5, decimal_places=2, null=True)
     camera_type = models.CharField(max_length=50, blank=True, null=True)
     photo_type = models.CharField(max_length=100, choices=CHOICE_PHOTOGRAPHY)
-
     active = models.BooleanField(default=True)
 
     @property
