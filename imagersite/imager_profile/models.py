@@ -15,9 +15,8 @@ class ActiveProfileManager(models.Manager):
     """Model manager for active profiles."""
 
     def get_queryset(self):
-        """Return active users."""
-        q = super(ActiveProfileManager, self).get_queryset()
-        return q.filter(user__is_active__exact=True)
+        """Return query set of active users."""
+        return super(ActiveProfileManager, self).get_queryset().filter(user__is_active__exact=True)
 
 
 @python_2_unicode_compatible
@@ -26,23 +25,28 @@ class ImagerProfile(models.Model):
 
     objects = models.Manager()
     active = ActiveProfileManager()
-
     user = models.OneToOneField(
         User,
         related_name="profile",
         on_delete=models.CASCADE
     )
+    CHOICE_PHOTOGRAPHY = (
+        ('LANDSCAPE', 'Landscape'),
+        ('PORTRAIT', 'Portrait'),
+        ('BLACK_WHITE', 'Black and White'),
+    )
+
     imager_id = models.UUIDField(default=uuid.uuid4, editable=False)
     bio = models.TextField()
     personal_website = models.URLField(max_length=200)
     hireable = models.BooleanField(default=True)
     address = models.CharField(max_length=255, blank=True, null=True)
-    phone = models.CharField(max_length=50, blank=True, null=True)
-    travel_radius = models.DecimalField(
-        max_digits=8, decimal_places=2, null=True)
+    phone = PhoneNumberField()
+    travel_radius = models.DecimalField(max_digits=5, decimal_places=2, null=True)
     camera_type = models.CharField(max_length=50, blank=True, null=True)
-    photo_type = models.CharField(max_length=50, blank=True, null=True)
-    # is_active = models.BooleanField(default=True)
+    photo_type = models.CharField(max_length=100, choices=CHOICE_PHOTOGRAPHY)
+
+    active = models.BooleanField(default=True)
 
     @property
     def is_active(self):
@@ -57,7 +61,6 @@ class ImagerProfile(models.Model):
 
 @receiver(post_save, sender=User)
 def make_profile_for_user(sender, instance, **kwargs):
-    """."""
+    """User registers and receives a profile."""
     new_profile = ImagerProfile(user=instance)
-    # new_profile.is_active = True
     new_profile.save()
