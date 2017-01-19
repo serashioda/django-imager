@@ -36,6 +36,12 @@ class ImagerProfile(models.Model):
         ('PORTRAIT', 'Portrait'),
         ('BLACK_WHITE', 'Black and White'),
     )
+    CHOICE_CAMERA = (
+        ('CANNON', 'Cannon'),
+        ('IPHONE', 'iPhone'),
+        ('NIKON', 'Nikon'),
+        ('POLAROID', 'polaroid'),
+    )
 
     imager_id = models.UUIDField(default=uuid.uuid4, editable=False)
     bio = models.TextField()
@@ -44,7 +50,7 @@ class ImagerProfile(models.Model):
     address = models.CharField(max_length=255, blank=True, null=True)
     phone = PhoneNumberField()
     travel_radius = models.DecimalField(max_digits=5, decimal_places=2, null=True)
-    camera_type = models.CharField(max_length=50, blank=True, null=True)
+    camera_type = models.CharField(max_length=50, choices=CHOICE_CAMERA)
     photo_type = models.CharField(max_length=100, choices=CHOICE_PHOTOGRAPHY)
     active = models.BooleanField(default=True)
 
@@ -62,5 +68,6 @@ class ImagerProfile(models.Model):
 @receiver(post_save, sender=User)
 def make_profile_for_user(sender, instance, **kwargs):
     """User registers and receives a profile."""
-    new_profile = ImagerProfile(user=instance)
-    new_profile.save()
+    if kwargs['created']:
+        new_profile = ImagerProfile(user=instance)
+        new_profile.save()
