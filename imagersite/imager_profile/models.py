@@ -48,10 +48,13 @@ class ImagerProfile(models.Model):
     personal_website = models.URLField(max_length=200)
     hireable = models.BooleanField(default=True)
     address = models.CharField(max_length=255, blank=True, null=True)
-    phone = PhoneNumberField()
-    travel_radius = models.DecimalField(max_digits=5, decimal_places=2, null=True)
-    camera_type = models.CharField(max_length=50, choices=CHOICE_CAMERA)
-    photo_type = models.CharField(max_length=100, choices=CHOICE_PHOTOGRAPHY)
+    phone = PhoneNumberField(null=True)
+    travel_radius = models.DecimalField(
+        max_digits=5, decimal_places=2, null=True)
+    camera_type = models.CharField(
+        max_length=50, choices=CHOICE_CAMERA, null=True)
+    photo_type = models.CharField(
+        max_length=100, choices=CHOICE_PHOTOGRAPHY, null=True)
     active = models.BooleanField(default=True)
 
     @property
