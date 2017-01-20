@@ -1,7 +1,13 @@
-{% load in %}
-{% trans "Click here to activate your profile!" %} {{ site.name }}:
+# {% load in %}
+# {% trans "Click here to activate your profile!" %} {{ site.name }}:
 
-Activate account: {{ site }}{% url 'registration_activate' activation_key %}
+# Activate account: {{ site }}{% url 'registration_activate' activation_key %}
 
-{% blocktrans %}This activation key link is valid for {{ expiration_days }} days. Activate now!{% endblocktrans %}
+# {% blocktrans %}This activation key link is valid for {{ expiration_days }} days. Activate now!{% endblocktrans %}
+
+
+
+Thanks for registering? Here's you ractivation link:
+
+{{ site }}/registration/activate/{{ activation.key}} <---?----->
 

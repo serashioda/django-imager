@@ -24,12 +24,13 @@ from imagersite import views
 
 
 urlpatterns = [
+    url(r'^admin/', include(admin.site.urls)),
+    url(r'^home$', home_view, name='home'),
     url(r'^$', views.home_view, name='home'),
-    url(r'^accounts/', include('registration.backends.hmac.urls')),
-    url(r'^login/', auth_views.login, name='login'),
-    url(r'^logout/', auth_views.logout, {'next_page': '/'}, name='logout'),
-    url(r'^admin/', admin.site.urls),
-    url(r'^profile/', include('imager_profile.urls'))
+    url(r'^registration/', include('registration.backends.hmac.urls')),
+    url(r'^login/', login, name='login'),
+    url(r'^logout/', {'next_page': '/home'},
+                       name='logout'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
