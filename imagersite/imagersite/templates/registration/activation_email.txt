@@ -1,6 +1,6 @@
-Thanks for registering? Here's your activation link:
+Thanks for registering with {{ site.name }}! Here's your activation link:
 
-{{ site }}/registration/activate/{{ activation.key }} {{ site.name }}
+http://{{ site }}{% url 'registration_activate' activation_key %}
 
-This activation key link is valid for {{ expiration_days }} days. Activate now! <---?----->
 
+This activation key link is valid for {{ expiration_days }} days. Activate now!

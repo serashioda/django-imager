@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'imager_profile',
     'bootstrap3',
-    'imager_images',
+    # 'imager_images',
     'imagersite',
 ]
 
@@ -144,8 +144,8 @@ EMAIL_HOST_USER = 'imager@gmail.com'
 EMAIL_HOST_PASSWORD = 'notthatpassword'
 DEFAULT_FROM_EMAIL = 'imager@gmail.com'
 
-# if DEBUG:
-#     EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'MEDIA')
 MEDIA_URL = "/media/"
