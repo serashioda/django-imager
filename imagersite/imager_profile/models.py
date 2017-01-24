@@ -7,7 +7,6 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.dispatch import receiver
 
 from phonenumber_field.modelfields import PhoneNumberField
-import uuid
 
 # Create your models here.
 
