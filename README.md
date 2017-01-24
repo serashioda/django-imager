@@ -8,14 +8,10 @@ by [Sera Smith](https://github.com/serashioda) and [Ben Petty](https://github.co
 
 ## Tools
 
-- Python (https://www.python.org/)
-- Django (https://www.djangoproject.com/)
-- PostgreSQL (https://www.postgresql.org/)
-- Psycopg2 (http://initd.org/psycopg/)
-- Django-Bootstrap3 (https://github.com/dyve/django-bootstrap3)
-- factory-boy
-_ Faker
-
+- Python
+- Django
+- PostgreSQL
+- Psycopg2
 ## Models
 
 The `ImagerProfile` class contains a standard Django user model with additional properties:
@@ -30,3 +26,18 @@ The `ImagerProfile` class contains a standard Django user model with additional 
 - `photo_type` (CharField storing the type of photo)
 - `is_active` (Boolean indicating if user account is active)
 - `imager_id` (UUIDField storing user's unique ID#)
+
+## Tests
+
+### Required testing packages:
+
+- factory-boy
+- Faker
+- Coverage
+
+
+To test with coverage:
+```bash
+$ coverage run --source='.' manage.py test
+$ coverage report
+```
