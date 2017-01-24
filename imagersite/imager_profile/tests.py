@@ -35,7 +35,7 @@ class ProfileTestCase(TestCase):
     def test_model_string(self):
         """Ensure each models has a string representation in Django shell."""
         for i in range(20):
-            self.assertIs(self.users[i].username, str(self.users[i]))
+            self.assertEqual(self.users[i].username, str(self.users[i]))
 
     def test_user_gets_imgr_profile(self):
         """Test User gets Imager Profile.
