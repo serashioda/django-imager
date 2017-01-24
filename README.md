@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/serashioda/django-imager.svg?branch=master)](https://travis-ci.org/serashioda/django-imager)
+[![Build Status](https://travis-ci.org/serashioda/django-imager.svg?branch=front-end-1)](https://travis-ci.org/serashioda/django-imager)
 
 # Django Imager
 
