@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Account Successfully Activated{% endblock %}
 
-{% block body %}
-    <p>Your registration is complete. Your profile is active.</p>
-    <a href="{% url 'login' %}"><button>Login</button></a>
+{% block header %}
+  <p>Your registration is complete. Your profile is active.</p>
+  <a href="{% url 'login' %}">
+      <button class="btn btn-lg btn-info btn-theme">
+        Login
+      </button></a>
 {% endblock %}

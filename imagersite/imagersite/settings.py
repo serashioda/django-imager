@@ -41,8 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'imager_profile',
-    'bootstrap3',
-    # 'imager_images',
     'imagersite',
 ]
 
