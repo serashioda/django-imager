@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/serashioda/django-imager.svg?branch=front-end-1)](https://travis-ci.org/serashioda/django-imager) [![Coverage Status](https://coveralls.io/repos/github/serashioda/django-imager/badge.svg?branch=master)](https://coveralls.io/github/serashioda/django-imager?branch=master)
+[![Build Status](https://travis-ci.org/serashioda/django-imager.svg?branch=front-end-1)](https://travis-ci.org/serashioda/django-imager) [![Coverage Status](https://coveralls.io/repos/github/serashioda/django-imager/badge.svg?branch=front-end-1)](https://coveralls.io/github/serashioda/django-imager?branch=front-end-1)
 
 # Django Imager
 
@@ -12,6 +12,7 @@ by [Sera Smith](https://github.com/serashioda) and [Ben Petty](https://github.co
 - Django
 - PostgreSQL
 - Psycopg2
+
 ## Models
 
 The `ImagerProfile` class contains a standard Django user model with additional properties:
