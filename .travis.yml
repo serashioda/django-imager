@@ -20,3 +20,8 @@ script:
 
 after_success:
   - coveralls
+
+# safelist
+branches:
+  only:
+  - front-end-1
