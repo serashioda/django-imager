@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'imagersite/base.html' %}
 
 {% block title %}Login{% endblock %}
 {% block css %}
@@ -12,5 +12,6 @@
         <h2 class="form-signin-header">Sign in here</h2>
         {{ form.as_table }}
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <input type="hidden" name="next" value="/profile/" />
     </form>
 {% endblock %}

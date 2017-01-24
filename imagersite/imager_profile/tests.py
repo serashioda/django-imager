@@ -2,7 +2,11 @@
 
 from django.test import TestCase, Client, RequestFactory
 from django.contrib.auth.models import User
+
+
 from imager_profile.models import ImagerProfile
+from imager_images.tests import UserFactory, ImageFactory, AlbumFactory
+from django.urls import reverse_lazy
 import factory
 from faker import Faker
 
@@ -101,7 +105,7 @@ class ProfileTestCase(TestCase):
         this_profile.save()
         # import pdb; pdb.set_tract()
         self.assertTrue(this_user.profile.photography_type == "PT")
-        
+
     def test_del_user_on_db_and_profile(self):
         """Test delete user on DB & Imgr.
 
