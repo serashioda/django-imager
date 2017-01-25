@@ -12,6 +12,7 @@ before_script:
 # command to install dependencies
 install:
   - pip install -r requirements.pip
+  - pip install coveralls
 
 # command to run tests
 script: 
