@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Register{% endblock %}
+{% load static %}
+{% block css %}<link href="{% static '#' %}" rel="stylesheet">{% endblock %}
+
+{% block body %}
+  <form method="post" class="form-signin">
+    <h2 class="form-signin-header">Register Here:</h2>
+    {% csrf_token %}
+    {{ form.signin }}
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+  </form>
+{% endblock %}

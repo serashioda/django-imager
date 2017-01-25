@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Register{% endblock %}
+{# {% block css %}<link href="{% static '#' %}" rel="stylesheet">{% endblock %} #}
+{% block body %}
+<ul>
+    {% for photo in photos %}
+    <li><img src="{{ photo.photo.url }}" /></li>
+    {% endfor %}
+</ul>
+{% endblock %}
