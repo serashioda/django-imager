@@ -12,11 +12,16 @@ before_script:
 # command to install dependencies
 install:
   - pip install -r requirements.pip
-  - pip install coveralls
+
 # command to run tests
 script: 
   - python imagersite/manage.py migrate
   - coverage run imagersite/manage.py test imagersite
+
+# safelist
+branches:
+  only:
+  - front-end-1
 
 after_success:
   - coveralls

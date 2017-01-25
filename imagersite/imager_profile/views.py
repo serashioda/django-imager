@@ -10,13 +10,3 @@ def profile_view(request, username):
     # profile = ImagerProfile.active.filter(user__username=username).first()
     # photos = profile.photos.all()
     # return render(request, 'imager_profile/profile.html', {'photos': photos})
-
-
-# -- 
-
-class SampleView(TemplateView):
-    """."""
-    template_name = "potato/home.html"
-
-    def get_context_data():
-        
