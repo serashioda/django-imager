@@ -42,3 +42,5 @@ To test with coverage:
 $ coverage run --source='.' manage.py test
 $ coverage report
 ```
+
+© 2017 Imager
