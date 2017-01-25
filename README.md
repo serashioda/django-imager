@@ -43,4 +43,4 @@ $ coverage run --source='.' manage.py test
 $ coverage report
 ```
 
-© 2017 Imager
+© 2017 Imager 
