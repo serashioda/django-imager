@@ -5,10 +5,10 @@
 {% block header %}
   {% if user.is_authenticated %}
   Hello, {{ user.username }}
+  <p>
+    <img src="/static/images/bob.jpg" data-effect="slide-bottom">
+  </p>
   {% endif %}
 
-<p>
-  <img src="/static/images/bob.jpg" data-effect="slide-bottom">
-</p>
 
 {% endblock %}
