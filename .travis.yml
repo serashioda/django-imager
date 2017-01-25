@@ -23,7 +23,7 @@ script:
 # safelist
 branches:
   only:
-  - models-1
+  - front-end-1
 
 after_success:
   - coveralls
