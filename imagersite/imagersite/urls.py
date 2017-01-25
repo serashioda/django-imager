@@ -33,6 +33,3 @@ urlpatterns = [
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-
-added LOGIN_REDIRECT_URL in settings.py. fixed urlpatterns
