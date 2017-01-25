@@ -15,13 +15,15 @@ install:
 
 # command to run tests
 script: 
-  - python imagersite/manage.py migrate
-  - coverage run imagersite/manage.py test imagersite
+  - cd imagersite
+  - python manage.py migrate
+  - coverage run manage.py test
+  - cp .coverage ../
 
 # safelist
 branches:
   only:
-  - front-end-1
+  - models-1
 
 after_success:
   - coveralls
