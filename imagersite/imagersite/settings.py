@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'imager_profile',
     'imagersite',
+    'bootstrap3'
 ]
 
 MIDDLEWARE = [

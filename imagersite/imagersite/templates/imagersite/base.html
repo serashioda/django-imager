@@ -12,10 +12,6 @@
 
   <title>{% block title %}Home{% endblock %} - Imager</title>
 
-{% load bootstrap3 %}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
-{% bootstrap_messages %}
   <link href="/static/css/normalize.css" rel="stylesheet">
   <link href="/static/css/bootstrap.css" rel="stylesheet">
   <link href="/static/css/custom-animations.css" rel="stylesheet">
@@ -66,17 +62,7 @@
     </div>
   </header>
 
-    <nav>
-    <ul>
-        <li><a href="{% url 'home' %}">Home</a></li>
-        {% if user.is_authenticated %}
-          <li><a href="{% url 'logout' %}">Log Out</a></li>
-        {% else %}
-          <li><a href="{% url 'registration_register' %}">Register</a></li>
-          <li><a href="{% url 'login' %}">Log In</a></li>
-        {% endif %}
-    </ul>
-    </nav>
+  
 <!-- . . . . . . . . SECTION 1 . . . . . . . . . -->
 
  <!--  <div id="w">
