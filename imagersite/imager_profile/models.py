@@ -27,7 +27,7 @@ class ImagerProfile(models.Model):
     active = ActiveProfileManager()
     user = models.OneToOneField(
         User,
-        related_name="profile",
+        related_name='profile',
         on_delete=models.CASCADE
     )
     CHOICE_PHOTOGRAPHY = (
