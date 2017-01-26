@@ -194,12 +194,14 @@ class ProfileFrontEndTests(TestCase):
     #         "email": "bob@dob.son",
     #         "pasword1": "tugboats",
     #         "password2": "tugboats",
-    #     }, follow=follow)
-    #     return response
+    #     }, follow=follow)  # <--------- follow and...
+    #     return response  # <--------- response are undefined?
+    #
+    #     the following tests don't work because the above method is broken
 
     # def test_can_register_new_user(self):
     #     """."""
-    #     self.assertTrue(User.objets.count() == 0)
+    #     self.assertTrue(User.objects.count() == 0)
     #     self.register_new_user()
     #     self.assertTrue(User.objects.count() == 1)
 
