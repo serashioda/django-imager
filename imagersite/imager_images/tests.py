@@ -17,5 +17,3 @@ class TestModelDefinition(SimpleTestCase):
         class TestModel(models.Model):
             pass
         self.assertIs(self.apps.get_model('app_label', 'TestModel'), TestModel)
-
-
