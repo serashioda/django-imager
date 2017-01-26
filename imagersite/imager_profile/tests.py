@@ -158,7 +158,7 @@ class ProfileFrontEndTests(TestCase):
             })
             self.assertTrue(response.status_code == 302)
 
-         def test_login_route_redirects_to_homepage(self):
+        def test_login_route_redirects_to_homepage(self):
             """."""
             new_user = UserFactory.create()
             new_user.username = "potato_joe"
