@@ -14,8 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
-from django.contrib import admin, auth
-# from django.contrib.auth.views import login, logout
+from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -25,11 +24,10 @@ from imagersite import views
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^home$', home_view, name='home'),
     url(r'^$', views.home_view, name='home'),
     url(r'^registration/', include('registration.backends.hmac.urls')),
-    url(r'^login/', login, name='login'),
-    url(r'^logout/', {'next_page': '/home'},
+    url(r'^login/', auth_views.login, name='login'),
+    url(r'^logout/', auth_views.logout, {'next_page': '/'},
                        name='logout'),
 ]
 

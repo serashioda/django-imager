@@ -30,6 +30,9 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
 ]
 
+LOGIN_REDIRECT_URL = '/profile'
+
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
 
 # Application definition
 
@@ -41,9 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'imager_profile',
-    'bootstrap3',
-    # 'imager_images',
     'imagersite',
+    'bootstrap3'
 ]
 
 MIDDLEWARE = [
@@ -132,7 +134,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = '/'
 
 ACCOUNT_ACTIVATION_DAYS = 7
 
