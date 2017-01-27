@@ -64,3 +64,7 @@ class Album(models.Model):
         related_name="album_photo"
     )
     published = models.CharField(max_length=10, choices=PUBLISHED_OPTIONS)
+
+    def __str__(self):
+        """String Representation of user album."""
+        return str(self.title)
