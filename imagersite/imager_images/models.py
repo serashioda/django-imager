@@ -33,7 +33,7 @@ class Photo(models.Model):
     description = models.TextField(max_length=200)
     date_uploaded = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
-    date_published = models.DateTimeField(auto_now=True)
+    date_published = models.DateTimeField(auto_now=True, null=True)
     published = models.CharField(max_length=10, choices=PUBLISHED_OPTIONS)
 
     def __str__(self):
@@ -58,7 +58,7 @@ class Album(models.Model):
     description = models.TextField(max_length=200)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
-    date_published = models.DateTimeField(auto_now=True)
+    date_published = models.DateTimeField(auto_now=True, null=True)
     photos = models.ManyToManyField(
         Photo,
         related_name="album_photo"
