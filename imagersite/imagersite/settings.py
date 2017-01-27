@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'imager_images',
     'imager_profile',
     'imagersite',
-    'bootstrap3'
 ]
 
 MIDDLEWARE = [
