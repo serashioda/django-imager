@@ -1,69 +1,70 @@
 """Tests for imager_images app."""
 
 from django.test import TestCase
-from django.contrib.auth.models import User
+
 from imager_images.models import Photo, Album
+from imager_profile.tests import UserFactory
 
 # from django.db import models
 # from django.test import SimpleTestCase
 # from django.test.utils import isolate_apps
 
 import factory
+import faker
+
+FAKE = faker.Faker()
 
 
-# Create your tests here.
-#  -- example test ---
-# @isolate_apps('app_label', attr_name='apps')
-# class TestModelDefinition(SimpleTestCase):
-#     """."""
-
-#     def test_model_definition(self):
-#         """."""
-#         class TestModel(models.Model):
-#             pass
-#         self.assertIs(self.apps.get_model(
-#             'app_label', 'TestModel'), TestModel)
+# ==================== FACTORY ============================================== #
 
 
-class ImageTestCase(TestCase):
+class PhotoFactory(factory.django.DjangoModelFactory):
+    """Make test images."""
+
+    class Meta:
+        """Setup factory model."""
+
+        model = Photo
+
+    image = factory.django.ImageField(filename='/tmp/image.jpg')
+
+
+class AlbumFactory(factory.django.DjangoModelFactory):
+    """Make test albums."""
+
+    class Meta:
+        """Setup factory model."""
+
+        model = Album
+
+
+# ===================== PHOTO MODEL TESTS =================================== #
+
+class PhotoTestCase(TestCase):
     """Images and album model test runner."""
-
-    class UserFactory(factory.django.DjangoModelFactory):
-        """Make test users."""
-
-        class Meta:
-            """Setup factory model."""
-
-            model = User
-        username = factory.Sequence(lambda n: "Bob {}".format(n))
-        email = factory.LazyAttribute(
-            lambda x: "{}@imager.com".format(x.username.replace(" ", ""))
-        )
-
-    class PhotoFactory(factory.django.DjangoModelFactory):
-        """Make test images."""
-
-        class Meta:
-            """Setup factory model."""
-
-            model = Photo
-        title = factory.Sequence(lambda n: "Photo {}".format(n))
-
-    class AlbumFactory(factory.django.DjangoModelFactory):
-        """Make test albums."""
-
-        class Meta:
-            """Setup factory model."""
-
-            model = Album
-        title = factory.Sequence(lambda n: "Album {}".format(n))
 
     def setUp(self):
         """Setup for the test."""
-        self.users = [self.UserFactory.create() for i in range(20)]
-        self.photos = [self.PhotoFactory.create() for i in range(120)]
-        self.albums = [self.AlbumFactory.create() for i in range(40)]
+        self.user = UserFactory.create()
+        self.photo = PhotoFactory.create(
+            user=self.user,
+        )
 
-    # def test_that_photo_has_title(self):
-    #     """Test that the photo has a title."""
-    #     self.assertTrue("Photo" in Photo.objects.first().title)
+    def test_photo_has_title_attribute(self):
+        """The photo should have a title attribute."""
+        self.photo.title = 'Photo title'
+        self.assertEqual(self.photo.title, 'Photo title')
+
+    def test_photo_id_exists(self):
+        """The photo should have an id/primary key."""
+        self.assertTrue(self.photo.id)
+
+    def test_photo_is_instance_of_model(self):
+        """The photo should be an instance of the Photo model."""
+        self.assertIsInstance(self.photo, Photo)
+
+    def test_photo_has_description(self):
+        """Test photo title field."""
+        self.photo.description = 'The photo description.'
+        self.assertEqual(self.photo.description, 'The photo description.')
+        

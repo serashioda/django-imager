@@ -3,14 +3,14 @@
 from __future__ import unicode_literals
 
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
 from django.utils.encoding import python_2_unicode_compatible
 
 
 PUBLISHED_OPTIONS = (
-    ('public', 'public'),
-    ('shared', 'shared'),
-    ('private', 'private'),
+    ('public', 'Public'),
+    ('shared', 'Shared'),
+    ('private', 'Private'),
 )
 
 
@@ -23,8 +23,12 @@ def image_path(instance, file_name):
 class Photo(models.Model):
     """Photo Model."""
 
+    def __str__(self):
+        """String Representation of user media-Photo."""
+        return str(self.title)
+
     user = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         related_name='photos',
         on_delete=models.CASCADE,
     )
@@ -33,20 +37,20 @@ class Photo(models.Model):
     description = models.TextField(max_length=200)
     date_uploaded = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
-    date_published = models.DateTimeField(auto_now=True, null=True)
+    date_published = models.DateTimeField(auto_now=True, null=True, blank=True)
     published = models.CharField(max_length=10, choices=PUBLISHED_OPTIONS)
-
-    def __str__(self):
-        """String Representation of user media-Photo."""
-        return str(self.title)
 
 
 @python_2_unicode_compatible
 class Album(models.Model):
     """Album Model."""
 
+    def __str__(self):
+        """String Representation of user album."""
+        return str(self.title)
+
     user = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         related_name='albums',
         on_delete=models.CASCADE,
     )
@@ -58,13 +62,13 @@ class Album(models.Model):
     description = models.TextField(max_length=200)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
-    date_published = models.DateTimeField(auto_now=True, null=True)
+    date_published = models.DateTimeField(auto_now=True, null=True, blank=True)
     photos = models.ManyToManyField(
         Photo,
         related_name="album_photo"
     )
-    published = models.CharField(max_length=10, choices=PUBLISHED_OPTIONS)
-
-    def __str__(self):
-        """String Representation of user album."""
-        return str(self.title)
+    published = models.CharField(
+        max_length=10,
+        choices=PUBLISHED_OPTIONS,
+        default='public'
+    )
