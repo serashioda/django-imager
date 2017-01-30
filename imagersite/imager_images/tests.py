@@ -67,4 +67,3 @@ class PhotoTestCase(TestCase):
         """Test photo title field."""
         self.photo.description = 'The photo description.'
         self.assertEqual(self.photo.description, 'The photo description.')
-        
