@@ -18,17 +18,18 @@ def all_photos(request):
     public_photos = []
     photos = Photo.objects.all()
     for photo in photos:
-        if photo.published == 'private' and photo.user.username != request.user.username:
-            return render(
-                request,
-                'imager_images/photos.html',
-                {'photos': public_photos}
-            )
-    public_photos.append(photo)
+        if photo.published != 'private' or photo.user.username == request.user.username:
+            public_photos.append(photo)
+    return render(
+        request,
+        'imager_images/photos.html',
+        {'photos': public_photos}
+    )
 
 
 def single_album(request, album_id):
     """."""
+    # import pdb; pdb.set_trace()
     album = Album.objects.get(id=album_id)
     if album.published == 'private' and album.user.username != request.user.username:
         return HttpResponse('Unauthorized, status=401')
@@ -42,14 +43,15 @@ def single_album(request, album_id):
 def all_albums(request):
     """."""
     public_albums = []
-    albums = Album.object.all()
+    albums = Album.objects.all()
     for album in albums:
-        if album.published == 'private' and album.user.username != request.user.username:
-            return render(
-                request,
-                'imager_images/albums.html',
-                {'albums': public_albums})
-    public_albums.append(album)
+        if album.published != 'private' and album.user.username == request.user.username:
+            public_albums.append(album)
+    return render(
+        request,
+        'imager_images/albums.html',
+        {'albums': public_albums}
+    )
 
 
 @login_required(login_url='/accounts/login/')
