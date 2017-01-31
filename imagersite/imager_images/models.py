@@ -3,9 +3,9 @@
 from __future__ import unicode_literals
 
 from django.db import models
-from django.conf import settings
 from django.utils.encoding import python_2_unicode_compatible
 
+from django.contrib.auth.models import User
 
 PUBLISHED_OPTIONS = (
     ('public', 'Public'),
@@ -28,7 +28,7 @@ class Photo(models.Model):
         return str(self.title)
 
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
+        User,
         related_name='photos',
         on_delete=models.CASCADE,
     )
@@ -50,7 +50,7 @@ class Album(models.Model):
         return str(self.title)
 
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
+        User,
         related_name='albums',
         on_delete=models.CASCADE,
     )
