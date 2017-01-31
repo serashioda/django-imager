@@ -9,16 +9,15 @@
 
 <h2> Albums </h2>
 
-{# {% if user.is_authenticated %} #}
-    {% for album in albums %}
-        <h2>{{ album.title }}</h2>
-        <a href="albums/{{ album.id }}">
-        <img src="{{ album.cover.image.url }}">
-        {% thumbnail album.cover.image "150x150" crop="center" as im %}
-            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
-        {% endthumbnail %}
-        </a>
-    {% endfor %}
-{# {% endif %} #}
+
+{% for album in albums %}
+    <h2>{{ album.title }}</h2>
+    <a href="albums/{{ album.id }}">
+    {% thumbnail album.cover.image "150x150" crop="center" as im %}
+        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+    {% endthumbnail %}
+    </a>
+{% endfor %}
+
 
 {% endblock %}

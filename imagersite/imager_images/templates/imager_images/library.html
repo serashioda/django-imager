@@ -6,7 +6,12 @@
 
 <h2>Albums</h2>
 {% for album in albums %}
+    <a href="{% url 'show_album' album.id %}">
     <h3>{{ album.title }}</h3>
+    {% thumbnail album.cover.image "150x150" crop="center" as im %}
+        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+    {% endthumbnail %}
+    </a>
 {% endfor %}
 
 <h2>Images</h2>
