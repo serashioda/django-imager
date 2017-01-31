@@ -94,3 +94,6 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+imagersite/MEDIA/*
+!imagersite/MEDIA/.gitkeep
