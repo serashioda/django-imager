@@ -35,9 +35,9 @@ class Photo(models.Model):
     date_published = models.DateTimeField(auto_now=True)
     published = models.CharField(max_length=10, choices=PUBLISHED_OPTIONS)
 
-    # def __str__(self):
-    # """String Representation of user media-Photo."""
-    # return ()
+    def __str__(self):
+    """String Representation of user media-Photo."""
+    return str(self.title)
 
 
 @python_2_unicode_compatible
@@ -62,3 +62,7 @@ class Album(models.Model):
         related_name="album_photo"
     )
     published = models.CharField(max_length=10, choices=PUBLISHED_OPTIONS)
+
+    def __str__(self):
+        """String Representation of user media-Photo."""
+        return str(self.title)
