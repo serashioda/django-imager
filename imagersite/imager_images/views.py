@@ -13,7 +13,6 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 from imager_images.models import Photo, Album
-# from imager_images.forms import AddAlbumForm, AddPhotoForm
 
 
 class AlbumView(ListView):
