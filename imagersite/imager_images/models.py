@@ -13,6 +13,13 @@ PUBLISHED_OPTIONS = (
     ('private', 'private'),
 )
 
+# class PublicPhotosManger(models.Manager):
+#     """."""
+
+#     def get_queryset(self):
+#         """."""
+#         return super(PublicPhotosManger, self).get_queryset().filter(published="PUBLIC")
+
 
 def image_path(instance, file_name):
     """Upload file for user in media root."""
@@ -36,8 +43,8 @@ class Photo(models.Model):
     published = models.CharField(max_length=10, choices=PUBLISHED_OPTIONS)
 
     # def __str__(self):
-    # """String Representation of user media-Photo."""
-    # return ()
+    #     """String representation of media-Photo."""
+    #     return ()
 
 
 @python_2_unicode_compatible
@@ -62,3 +69,7 @@ class Album(models.Model):
         related_name="album_photo"
     )
     published = models.CharField(max_length=10, choices=PUBLISHED_OPTIONS)
+
+    # def __str__(self):
+    #     """String representation of media-Album."""
+    #     return ()
