@@ -29,6 +29,7 @@ def image_path(instance, file_name):
 @python_2_unicode_compatible
 class Photo(models.Model):
     """Photo Model."""
+
     user = models.ForeignKey(
         User,
         related_name='photos',
@@ -42,14 +43,16 @@ class Photo(models.Model):
     date_published = models.DateTimeField(auto_now=True)
     published = models.CharField(max_length=10, choices=PUBLISHED_OPTIONS)
 
-    # def __str__(self):
-    #     """String representation of media-Photo."""
-    #     return ()
+
+    def __str__(self):
+        """String Representation of user media-Photo."""
+        return str(self.title)
 
 
 @python_2_unicode_compatible
 class Album(models.Model):
     """Album Model."""
+
     user = models.ForeignKey(
         User,
         related_name='albums',
@@ -70,6 +73,7 @@ class Album(models.Model):
     )
     published = models.CharField(max_length=10, choices=PUBLISHED_OPTIONS)
 
-    # def __str__(self):
-    #     """String representation of media-Album."""
-    #     return ()
+
+    def __str__(self):
+        """String Representation of user media-Photo."""
+        return str(self.title)

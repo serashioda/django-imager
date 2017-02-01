@@ -20,7 +20,7 @@
     font-family: 'Raleway', sans-serif;
 } 
 body { 
-	background: #fff; 
+	background: black; 
 	margin: 0; 
 	color: white;
 }
@@ -124,6 +124,13 @@ a:focus {
 
 img {
 	padding-bottom: 10px;
+	max-width: 100%;
+}
+
+.bigphoto {
+	padding-bottom: 10px;
+	max-width: 90%;
+	margin: 5%;
 }
 
 /* FORM CONFIGURATION */
@@ -211,6 +218,7 @@ input {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    padding-bottom: 5%;
 }
 
 #h h1 {
