@@ -1,7 +1,7 @@
 {% extends 'imagersite/base.html' %}
 {% block title %}Register{% endblock %}
-{# {% block css %}<link href="{% static '#' %}" rel="stylesheet">{% endblock %} #}
-{% block body %}
+
+{% block content %}
 <ul>
     {% for photo in photos %}
     <li><img src="{{ photo.photo.url }}" /></li>
