@@ -1,0 +1,13 @@
+{% extends 'imagersite/base.html' %}
+
+{% block header %}
+
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h2>Add Album</h2>
+      {{ form.as_p}}
+    <button class="btn btn-lg btn-info btn-theme" type="submit">Add</button>
+    <!-- <input type="hidden" name="next" value="/profile/" /> -->
+  </form>
+
+{% endblock %}
