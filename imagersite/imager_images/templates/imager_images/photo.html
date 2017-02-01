@@ -7,12 +7,12 @@
 
 
 <h4>{{ photo.title }}</h4>
-<p>Album: 
-<br />Description: {{ photo.description }}
+<p>Description: {{ photo.description }}
 <br />Date Uploaded: {{ photo.date_uploaded }}
 <br />Date Last Modified: {{ photo.date_modified }}
 <br />{{ photo.published }}
 {% if photo.date_published %}
 <br />Date Published: {{ photo.date_published }}
+</p>
 {% endif %}
 {% endblock %}
