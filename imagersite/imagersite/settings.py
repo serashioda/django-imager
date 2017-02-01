@@ -89,7 +89,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'django_imager',
         'USER': os.environ['USERNAME'],
-        'HOST': '127.0.0.1',
+        'PASSWORD': os.environ['PASSWORD'],
+        'HOST': os.environ['HOSTNAME'],
         'PORT': '5432',
         'TEST': {
             'NAME': 'test_imager_db'
