@@ -1,7 +1,8 @@
 """Images url paths."""
 from django.conf.urls import url
 from imager_images.models import Album, Photo
-from imager_images.views import AlbumView, PhotoView, AlbumCollectionView, PhotoCollectionView, LibraryView, AddAlbum, AddPhoto, EditAlbum, EditPhoto, TaglistView
+from imager_images.views import AlbumView, PhotoView, AlbumCollectionView, PhotoCollectionView, LibraryView, AddAlbum, AddPhoto, EditAlbum, EditPhoto 
+# TaglistView
 from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
@@ -14,5 +15,5 @@ urlpatterns = [
     url(r'^albums/(?P<pk>\d+)/edit/$', EditAlbum.as_view(), name='edit_album'),
     url(r'^albums/$', AlbumCollectionView.as_view(), name='list_albums'),
     url(r'^photos/$', PhotoCollectionView.as_view(), name='list_photos'),
-    url(r'^tagged/(?P<tag>[\w-]+)/$', TagListView.as_view(), name='tag_list')
+    # url(r'^tagged/(?P<tag>[\w-]+)/$', TagListView.as_view(), name='tag_list')
 ]
