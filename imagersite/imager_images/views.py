@@ -14,9 +14,9 @@ def single_photo(request, photo_id):
 
 
 def all_photos(request):
-    """."""
+    """View will return all public photos."""
     public_photos = []
-    photos = Photo.objects.all()
+    photos = Photo.objects.all().order_by('-id')
     for photo in photos:
         if photo.published != 'private' or photo.user.username == request.user.username:
             public_photos.append(photo)
