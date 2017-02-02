@@ -383,3 +383,12 @@ input {
 .right {
 	text-align: right;
 }
+
+#randomimg {
+	margin-top: 5vh;
+	width: 50vw;
+	border-radius: 5%;
+	border-style: solid;
+	border-color: white;
+	border-width: 5px;
+}
