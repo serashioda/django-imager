@@ -96,8 +96,12 @@ class LibraryView(ListView):
         """."""
         return {}
 
-class AddPhoto(CreateView):
-    """Add a photo."""
+
+class AddPhoto(PermissionRequiredMixin, CreateView):
+    """Add photo."""
+
+    login_url = reverse_lazy('login')
+    permission_required = "imager_images.add_photo"
 
     template_name = "imager_images/add_photo.html"
     model = Photo
@@ -105,13 +109,27 @@ class AddPhoto(CreateView):
     success_url = reverse_lazy('library')
 
     def form_valid(self, form):
-        """."""
+        """Form validation for adding a photo."""
         form.instance.user = self.request.user
         return super(AddPhoto, self).form_valid(form)
 
 
-class AddAlbum(CreateView):
+class EditPhoto(PermissionRequiredMixin, UpdateView):
+    """Edit photo."""
+
+    permission_required = "imager_images.change_photo"
+
+    template_name = "imager_images/add_photo.html"
+    model = Photo
+    fields = ['image', 'title', 'description']
+    success_url = reverse_lazy('library')
+
+
+class AddAlbum(PermissionRequiredMixin, CreateView):
     """Add album."""
+
+    login_url = reverse_lazy('login')
+    permission_required = "imager_images.add_album"
 
     template_name = "imager_images/add_album.html"
     model = Album
@@ -119,67 +137,17 @@ class AddAlbum(CreateView):
     success_url = reverse_lazy('library')
 
     def form_valid(self, form):
-        """."""
+        """Form validation for adding album."""
         form.instance.user = self.request.user
         return super(AddAlbum, self).form_valid(form)
 
-# @login_required(login_url='/accounts/login/')
-# def library(request):
-#     """Library view."""
-#     albums = request.user.albums.all()
-#     photos = request.user.photos.all()
-#     return render(
-#         request,
-#         'imager_images/library.html',
-#         context={'albums': albums, 'photos': photos}
-#     )
 
+class EditAlbum(PermissionRequiredMixin, UpdateView):
+    """Edit Album."""
 
-# def single_photo(request, photo_id):
-#     """."""
-#     photo = Photo.objects.get(id=photo_id)
-#     if photo.published == 'private' and photo.user_id != request.user.id:
-#         return HttpResponse('Unauthorized', status=401)
-#     return render(request, 'imager_images/photo.html', {"photo": photo})
+    permission_required = "imager_images.change_album"
 
-
-# def all_photos(request):
-#     """."""
-#     public_photos = []
-#     photos = Photo.objects.all()
-#     for photo in photos:
-#         if photo.published != 'private' or photo.user.username == request.user.username:
-#             public_photos.append(photo)
-#     return render(
-#         request,
-#         'imager_images/photos.html',
-#         {'photos': public_photos}
-#     )
-
-
-# def single_album(request, album_id):
-#     """."""
-#     # import pdb; pdb.set_trace()
-#     album = Album.objects.get(id=album_id)
-#     if album.published == 'private' and album.user.username != request.user.username:
-#         return HttpResponse('Unauthorized, status=401')
-#     return render(
-#         request,
-#         'imager_images/album.html',
-#         {'album': album}
-#     )
-
-
-# def all_albums(request):
-#     """."""
-#     public_albums = []
-#     albums = Album.objects.all()
-#     for album in albums:
-#         if album.published != 'private' and album.user.username == request.user.username:
-#             public_albums.append(album)
-#     return render(
-#         request,
-#         'imager_images/albums.html',
-#         {'albums': public_albums}
-#     )
-
+    template_name = "imager_images/add_album.html"
+    model = Album
+    fields = ['title', "cover", "description", "photos"]
+    success_url = reverse_lazy('library')
