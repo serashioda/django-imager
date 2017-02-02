@@ -5,16 +5,19 @@
 
 {% block title %}{{profile.user}} - Library{% endblock %}
 
-{% block header %} 
+{% block content %} 
 
-<h2> Album </h2>
-
-{# <img src="{{ album.cover.image.url }}"> #}
-{# {% if user.is_authenticated %} #}
-    {% for photo in album.photos.all %}
-        <img src="{{ photo.image.url }}">
-    {% endfor %}
-{# {% endif %} #}
-
+<h2>Album</h2>
+<h3>{{ album.title }}</h3>
+{% if user.is_authenticated %}
+<img class="bigphoto" src="{{ album.cover.image.url }}" alt="Album Cover"/>
+<div class="stacks">
+  {% for photo in album.photos.all %}
+    <a href="/photos/{{ photo.id }}/">
+      <img class="stacks" src="{{ photo.image.url }}">
+    </a>
+  {% endfor %}
+</div>
+{% endif %}
 
 {% endblock %}

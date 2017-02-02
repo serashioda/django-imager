@@ -182,3 +182,4 @@ class AddAlbum(CreateView):
 #         'imager_images/albums.html',
 #         {'albums': public_albums}
 #     )
+
