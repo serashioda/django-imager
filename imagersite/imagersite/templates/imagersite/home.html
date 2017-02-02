@@ -3,12 +3,4 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-  {% if user.is_authenticated %}
-  Hello, {{ user.username }}
-  <p>
-    <img src="/static/images/bob.jpg" data-effect="slide-bottom">
-  </p>
-  {% endif %}
-
-
 {% endblock %}
