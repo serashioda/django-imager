@@ -3,15 +3,16 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.http import HttpResponseForbidden
 
-from django.urls import reverse
+# from django.urls import reverse
 from django.urls import reverse_lazy
 
 from django.views.generic.edit import CreateView
-from django.views.generic import ListView, TemplateView
+from django.views.generic import ListView, TemplateView, CreateView, UpdateView
 
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 
+from django.shortcuts import render
 from imager_images.models import Photo, Album
 
 
