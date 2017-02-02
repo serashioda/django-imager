@@ -10,6 +10,7 @@ omit =
     manage.py
     imagersite/wsgi.py
     */apps.py
+    */settings.py
 
 [report]
 show_missing = True
