@@ -33,14 +33,9 @@
             Logout
           </button>
         </a>
-        <a href="{% url 'list_albums' %}">
+        <a href="{% url 'library' %}">
           <button class="btn btn-lg btn-info btn-register">
-            Albums
-          </button>
-        </a>
-        <a href="{% url 'list_photos' %}">
-          <button class="btn btn-lg btn-info btn-register">
-            Photos
+            My Library
           </button>
         </a>
         {% else %}
@@ -55,6 +50,16 @@
           </button>
         </a>
         {% endif %}
+        <a href="{% url 'list_albums' %}">
+          <button class="btn btn-lg btn-info btn-register">
+            Albums
+          </button>
+        </a>
+        <a href="{% url 'list_photos' %}">
+          <button class="btn btn-lg btn-info btn-register">
+            Photos
+          </button>
+        </a>
         <a href="{% url 'home' %}">
           <button class="btn btn-lg btn-info btn-register">
             Home

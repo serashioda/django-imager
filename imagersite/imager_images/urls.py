@@ -7,5 +7,5 @@ urlpatterns = [
     url(r'^photos/$', all_photos, name='list_photos'),
     url(r'^albums/(?P<album_id>\d+)', single_album, name='show_album'),
     url(r'^albums/?', all_albums, name='list_albums'),
-    url(r'^library$', library, name='library'),
+    url(r'^library/$', library, name='library'),
 ]
