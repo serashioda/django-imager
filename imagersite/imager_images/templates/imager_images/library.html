@@ -4,14 +4,33 @@
 
 {% block content %}
 
-<h2>Albums</h2>
-{% for album in albums %}
-    <h3>{{ album.title }}</h3>
-{% endfor %}
+{% if user.is_authenticated %}
 
-<h2>Images</h2>
+<h2> Albums </h2>
+
+<div class="stacks">
+  {% for album in albums %}
+  <div>
+  <h2>{{ album.title }}</h2>
+  <a href="/albums/{{ album.id }}">
+    <img src="{{ album.cover.image.url }}" />
+  </a>
+  </div>
+  {% endfor %}
+</div>
+
+
+<h2>Photos</h2>
+
+<div class="stacks">
 {% for photo in photos %}
-    <h3>{{ photo.title }}</h3>
+<a href="{{ photo.id }}">
+  <img class="stacks" src="{{ photo.image.url }}">
+</a>
 {% endfor %}
+</div>
+
+
+{% endif %}
 
 {% endblock %}

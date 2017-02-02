@@ -57,8 +57,8 @@ def all_albums(request):
 @login_required(login_url='/accounts/login/')
 def library(request):
     """Library view."""
-    albums = request.user.albums.all()
-    photos = request.user.photos.all()
+    albums = request.user.albums.all().order_by('-id')
+    photos = request.user.photos.all().order_by('-id')
     return render(
         request,
         'imager_images/library.html',
