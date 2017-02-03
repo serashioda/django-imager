@@ -37,8 +37,8 @@
         - python-dev
         - libpq-dev
 
+    - name: Clone the {{ app_name }} to the Home Directory
+      git: clone=yes repo=https://github.com/serashioda/django-imager.git dest={{ app_root }} version=deployment
 
-    - name: Clone the Book App to the Home Directory
-      git: clone=yes repo=https://github.com/serashioda/django-imager.git
-
-    - name: Create a virtual environment in the book app repo.
+    - name: Create a virtual environment in the {{ app_name }} app repo
+      command: python3 -m venv {{ environment_location }}
