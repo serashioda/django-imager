@@ -1,0 +1,44 @@
+----
+- hosts: remote-wsgi
+  remote_user: ubuntu
+  vars_files:
+    - external_vars.yml
+  tasks:
+    - name: Update the Ubuntu machine with all the latest stuff
+      apt: update_cache=yes
+      become: yes
+      become_method: sudo
+
+    - name: Upgrade the Ubuntu machine with all the latest stuff
+      apt: upgrade=yes
+      become: yes
+      become_method: sudo
+
+    - name: Install All the things
+      apt: name={{ item }} state=latest
+      become: yes
+      become_method: sudo
+      with_items:
+        - nginx
+        - python3
+        - python3-pip
+        - python3.4-venv
+        - git
+        - gunicorn
+        - libtiff5-dev
+        - libjpeg8-dev
+        - zlib1g-dev
+        - libfreetype6-dev
+        - liblcms2-dev
+        - libwebp-dev
+        - tcl8.6-dev
+        - tk8.6-dev
+        - python-tk
+        - python-dev
+        - libpq-dev
+
+
+    - name: Clone the Book App to the Home Directory
+      git: clone=yes repo=https://github.com/serashioda/django-imager.git
+
+    - name: Create a virtual environment in the book app repo.
