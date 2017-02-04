@@ -1,38 +1,48 @@
 {% extends 'imagersite/base.html' %}
 {% load thumbnail %}
 
+{% block title %}Library{% endblock %}
+
 {% block content %}
 
 {% if user.is_authenticated %}
 
-<h2> Albums </h2>
+<h2>My Albums </h2>
+  <a href="{% url 'add_album' %}">
+    <button class="btn btn-lg btn-info">
+    Add Album
+    </button>
+  </a>
 
 <div class="stacks">
-    {% for album in albums %}
-    <div>
-    <h2>{{ album.title }}</h2>
-    <a href="/albums/{{ album.id }}">
-        <img src="{{ album.cover.image.url }}" />
-    </a>
-    </div>
-    {% endfor %}
+  {% for album in albums %}
+  <div>
+  <h2>{{ album.title }}</h2>
+  <a href="/images/albums/{{ album.id }}">
+    <img src="{{ album.cover.image.url }}" />
+  </a>
+  </div>
+  {% endfor %}
 </div>
 
 
-<h2>Photos</h2>
+<h2>My Photos</h2>
+    <a href="{% url 'add_photo' %}">
+    <button class="btn btn-lg btn-info">
+    Add Photo
+    </button>
+    </a>
 
 <div class="stacks">
    {% for photo in photos %}
     <div>
     <h3>{{ photo.title }}</h3>
-    <a href="{{ photo.id }}">
+    <a href="/images/photos/{{ photo.id }}">
         <img class="stacks" src="{{ photo.image.url }}">
     </a>
     </div>
     {% endfor %}
 </div>
 
-
 {% endif %}
-
 {% endblock %}

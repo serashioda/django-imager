@@ -13,7 +13,7 @@
 <img class="bigphoto" src="{{ album.cover.image.url }}" alt="Album Cover"/>
 <div class="stacks">
   {% for photo in album.photos.all %}
-    <a href="/photos/{{ photo.id }}/">
+    <a href="/images/photos/{{ photo.id }}/">
       <img class="stacks" src="{{ photo.image.url }}">
     </a>
   {% endfor %}

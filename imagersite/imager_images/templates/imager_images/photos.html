@@ -1,12 +1,13 @@
 {% extends 'imagersite/base.html' %}
 
+{% block title %}Photos{% endblock %}
 
 {% block content %}
 <h2>Photos</h2>
 
 <div class="stacks">
 {% for photo in photos %}
-<a href="{{ photo.id }}">
+<a href="/images/photos/{{ photo.id }}">
   <img class="stacks" src="{{ photo.image.url }}">
 </a>
 {% endfor %}

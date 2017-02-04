@@ -3,12 +3,9 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-
-  {% if user.is_authenticated %}
-  Hello, {{ user.username }}
-  <p>
-    Welcome to IMAGER.
-  </p>
-  {% endif %}
-
+{% if photo == None %}
+<img id="randomimg" alt="Random Imager Image" src="/static/images/bob.jpg" />
+{% else %}
+<img id="randomimg" alt="Random Imager Image" src="{{ photo.image.url }}" />
+{% endif %}
 {% endblock %}

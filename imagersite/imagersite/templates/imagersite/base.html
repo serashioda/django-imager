@@ -23,7 +23,7 @@
     <div class="container">
       <div class="row right">
         {% if user.is_authenticated %}
-        Hello, <a href="/profile/">{{ user.username }}</a>
+        Hello, <a href="{% url 'profile' %}">{{ user.username }}</a>
         {% endif %}
       </div>
       <nav class="row">
