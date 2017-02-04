@@ -361,7 +361,7 @@ input {
 	font-size: 13px;
 }
 
-/* ---------- NEW STUFF ------------------ */
+/* ---------- ADDED CSS ------------------ */
 
 .stacks {
     -moz-column-count: 3;
@@ -391,4 +391,19 @@ input {
 	border-style: solid;
 	border-color: white;
 	border-width: 5px;
+}
+
+input, select, textarea {
+    color: black;
+    padding: 1%;
+}
+
+form {
+	text-align: center;
+}
+
+input[type="file"] {
+	color: white;
+    display: inline;
+    background-color: transparent;
 }
