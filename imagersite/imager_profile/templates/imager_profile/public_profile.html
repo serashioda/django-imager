@@ -1,0 +1,37 @@
+{% extends 'imagersite/base.html' %}
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<ul>
+    <h2>{{  profile.user.username }} - Profile</h2>
+
+<section>
+<h2>Welcome {{ profile.user.username }}!</h2>
+<ul>
+    <li>Name: {{ profile.user.first_name|title }} {{ profile.user.last_name|title }}</li>
+    <li>Email: <a href="mailto:{{ profile.user.email }}">{{ profile.user.email }}</a></li>
+    <li>Bio: {{ profile.user.profile.bio }}</li>
+    <li>Personal Website: <a href="{{ profile.user.profile.personal_website }}">{{ profile.user.profile.personal_website }}</a></li>
+    <li>For Hire: {{ profile.user.profile.hireable }}</li>
+    <li>Travel Radius: {{ profile.user.profile.travel_radius }} Miles</li>
+    <li>Phone: {{ profile.user.profile.phone }}</li>
+    <li>Address: {{ profile.user.profile.address }}</li>
+    <li>Choice Photography: {{ profile.user.profile.photo_type }}</li>
+    <li>Camera: {{ profile.user.profile.camera_type }}</li>
+    <li>Photos Uploaded: {{ profile.user.photos.count }}</li>
+    <li>Albums Created: {{ profile.user.albums.count }}</li>
+</ul>
+</section>
+{% endblock %}
+
+
+   <!--  
+    bio
+    personal_website
+    hireable
+    address
+    phone 
+    travel_radius
+    camera_type
+    photo_type 
+    active -->

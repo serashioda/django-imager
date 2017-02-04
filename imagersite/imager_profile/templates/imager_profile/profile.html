@@ -3,8 +3,35 @@
 
 {% block content %}
 <ul>
-    {% for photo in photos %}
-    <li><img src="{{ photo.photo.url }}" /></li>
-    {% endfor %}
+    <h2>{{ user.username }} - Profile</h2>
+
+<section>
+<h2>Welcome {{ user.username }}!</h2>
+<ul>
+    <li>Name: {{ user.first_name|title }} {{ user.last_name|title }}</li>
+    <li>Email: <a href="mailto:{{ user.email }}">{{ user.email }}</a></li>
+    <li>Bio: {{ user.profile.bio }}</li>
+    <li>Personal Website: <a href="{{ user.profile.personal_website }}">{{ user.profile.personal_website }}</a></li>
+    <li>For Hire: {{ user.profile.hireable }}</li>
+    <li>Travel Radius: {{ user.profile.travel_radius }} Miles</li>
+    <li>Phone: {{ user.profile.phone }}</li>
+    <li>Address: {{ user.profile.address }}</li>
+    <li>Choice Photography: {{ user.profile.photo_type }}</li>
+    <li>Camera: {{ user.profile.camera_type }}</li>
+    <li>Photos Uploaded: {{ user.photos.count }}</li>
+    <li>Albums Created: {{ user.albums.count }}</li>
 </ul>
+</section>
 {% endblock %}
+
+
+   <!--  
+    bio
+    personal_website
+    hireable
+    address
+    phone 
+    travel_radius
+    camera_type
+    photo_type 
+    active -->

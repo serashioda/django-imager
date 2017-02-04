@@ -8,7 +8,7 @@ import random
 
 
 def home_view(request):
-    """Home view."""
+    """Return a random image from the db on the home page."""
     public_photos = []
     photos = Photo.objects.all()
     for photo in photos:
