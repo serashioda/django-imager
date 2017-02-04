@@ -9,7 +9,6 @@
 
 <h2> Albums </h2>
 
-{% if user.is_authenticated %}
 <div class="stacks">
   {% for album in albums %}
   <div>
@@ -20,6 +19,5 @@
   </div>
   {% endfor %}
 </div>
-{% endif %}
 
 {% endblock %}
