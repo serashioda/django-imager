@@ -22,12 +22,6 @@ class UserFactory(factory.django.DjangoModelFactory):
         lambda x: "{}@imager.com".format(x.username.replace(" ", ""))
     )
 
-<<<<<<< HEAD
-        username = factory.Sequence(lambda n: "Bob {}".format(n))
-        email = factory.LazyAttribute(
-            lambda x: "{}@imager.com".format(x.username.replace(" ", ""))
-        )
-=======
     class Meta:
         """Setup factory model."""
 
@@ -39,18 +33,13 @@ class UserFactory(factory.django.DjangoModelFactory):
 
 class ProfileTestCase(TestCase):
     """Profile model test runner."""
->>>>>>> df061446c8ef235667945a254571b871ad0c3668
 
     def setUp(self):
         """Setup for the test."""
         self.users = [UserFactory.create() for i in range(20)]
 
     def test_profile_created(self):
-<<<<<<< HEAD
-        """Test that ImagerProfile object is created for every user saved."""
-=======
         """Test that ImagerProfile object is created once user is saved."""
->>>>>>> df061446c8ef235667945a254571b871ad0c3668
         self.assertTrue(ImagerProfile.objects.count() == 20)
 
     def test_model_string(self):
@@ -80,7 +69,6 @@ class ProfileTestCase(TestCase):
         query = ImagerProfile.active.all()
         self.assertIsInstance(query[0], ImagerProfile)
 
-<<<<<<< HEAD
     def test_update_profile(self):
         """Test that a profile update also updates db."""
         # self.users[0].profile.bio = "This is mo betta."
@@ -88,7 +76,7 @@ class ProfileTestCase(TestCase):
         # self.assertTrue(
         #     query.profile.bio == "This is mo betta.")
         pass
-=======
+
     def test_inactive_users_have_inactive(self):
         """."""
         this_user = self.users[0]
@@ -102,7 +90,6 @@ class ProfileTestCase(TestCase):
         for i in range(20):
             user = self.users[i]
             self.assertTrue(user.is_active)
->>>>>>> df061446c8ef235667945a254571b871ad0c3668
 
     def test_string_returns_profile_info(self):
         """Test if the string method returns matching profile info."""
@@ -110,8 +97,6 @@ class ProfileTestCase(TestCase):
             user = str(self.users[i])
             self.assertTrue('Bob', '@imager.com' in user)
 
-
-<<<<<<< HEAD
     def test_profile_is_active(self):
         """Test profile.is_active is active."""
         for i in range(20):
@@ -123,7 +108,7 @@ class ProfileTestCase(TestCase):
         for i in range(20):
             user = str(self.users[i])
             self.assertTrue('Bob', '@imager.com' in user)
-=======
+
 # =================== FRONT END TESTS ======================================= #
 
 
@@ -180,4 +165,3 @@ class ProfileFrontEndTests(TestCase):
         self.assertRedirects(
             response, "/", status_code=302, target_status_code=200
         )
->>>>>>> df061446c8ef235667945a254571b871ad0c3668

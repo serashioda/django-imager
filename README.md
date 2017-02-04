@@ -13,10 +13,7 @@ by [Sera Smith](https://github.com/serashioda) and [Ben Petty](https://github.co
 - Django
 - PostgreSQL
 - Psycopg2
-<<<<<<< HEAD
-=======
 
->>>>>>> df061446c8ef235667945a254571b871ad0c3668
 ## Models
 
 The `ImagerProfile` class contains a standard Django user model with additional properties:
@@ -61,6 +58,3 @@ imagersite/views.py              3      3     0%   3-8
 TOTAL                           86     22    74%
 ```
 
-=======
-```
->>>>>>> df061446c8ef235667945a254571b871ad0c3668

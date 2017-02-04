@@ -1,5 +1,3 @@
-.DS_Store
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -95,9 +93,6 @@ ENV/
 # Rope project settings
 .ropeproject
 
-<<<<<<< HEAD
-.DS_Store
-=======
 # Ignore the files in the Media directory, but not the directory itself
 imagersite/MEDIA/*
 !imagersite/MEDIA/.gitkeep
@@ -113,4 +108,3 @@ vagrant_ansible_inventory_default
 *.retry
 external_vars.yml
 
->>>>>>> df061446c8ef235667945a254571b871ad0c3668

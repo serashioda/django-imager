@@ -44,10 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-<<<<<<< HEAD
-=======
     'imager_images',
->>>>>>> df061446c8ef235667945a254571b871ad0c3668
     'imager_profile',
     'imagersite',
     'sorl.thumbnail'
@@ -93,12 +90,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'django_imager',
         'USER': os.environ['USERNAME'],
-<<<<<<< HEAD
-        'HOST': '127.0.0.1',
-=======
         'PASSWORD': os.environ['PASSWORD'],
         'HOST': os.environ['HOSTNAME'],
->>>>>>> df061446c8ef235667945a254571b871ad0c3668
         'PORT': '5432',
         'TEST': {
             'NAME': 'test_imager_db'
