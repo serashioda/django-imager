@@ -1,4 +1,4 @@
-"""imagersite URL Configuration
+"""imagersite URL Configuration.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.10/topics/http/urls/
@@ -23,12 +23,13 @@ from imagersite import views
 
 
 urlpatterns = [
+    url(r'^admin/', include(admin.site.urls)),
     url(r'^$', views.home_view, name='home'),
-    url(r'^accounts/', include('registration.backends.hmac.urls')),
+    url(r'^registration/', include('registration.backends.hmac.urls')),
     url(r'^login/', auth_views.login, name='login'),
-    url(r'^logout/', auth_views.logout, {'next_page': '/'}, name='logout'),
-    url(r'^admin/', admin.site.urls),
-    url(r'^profile/', include('imager_profile.urls'))
-]
+    url(r'^logout/', auth_views.logout, {'next_page': '/'},
+                       name='logout'),
+    url(r'^', include('imager_images.urls'))
+]   
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

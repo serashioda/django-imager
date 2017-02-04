@@ -25,8 +25,15 @@ SECRET_KEY = '8%#4ga*0pn56=k6tlz+s5^zf#i&rykywoz2l(5)o-$6fd*um*n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '.amazonaws.com'
+]
 
+LOGIN_REDIRECT_URL = '/profile'
+
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
 
 # Application definition
 
@@ -37,8 +44,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+<<<<<<< HEAD
+=======
+    'imager_images',
+>>>>>>> df061446c8ef235667945a254571b871ad0c3668
     'imager_profile',
     'imagersite',
+    'sorl.thumbnail'
+    # 'taggit'
 ]
 
 MIDDLEWARE = [
@@ -80,7 +93,12 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'django_imager',
         'USER': os.environ['USERNAME'],
+<<<<<<< HEAD
         'HOST': '127.0.0.1',
+=======
+        'PASSWORD': os.environ['PASSWORD'],
+        'HOST': os.environ['HOSTNAME'],
+>>>>>>> df061446c8ef235667945a254571b871ad0c3668
         'PORT': '5432',
         'TEST': {
             'NAME': 'test_imager_db'
@@ -126,7 +144,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-LOGIN_REDIRECT_URL = 'home'
+
+LOGIN_REDIRECT_URL = '/'
 
 ACCOUNT_ACTIVATION_DAYS = 7
 
@@ -138,8 +157,8 @@ EMAIL_HOST_USER = 'imager@gmail.com'
 EMAIL_HOST_PASSWORD = 'notthatpassword'
 DEFAULT_FROM_EMAIL = 'imager@gmail.com'
 
-# if DEBUG:
-#     EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'MEDIA')
 MEDIA_URL = "/media/"

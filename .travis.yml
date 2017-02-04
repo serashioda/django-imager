@@ -23,7 +23,11 @@ script:
 # safelist
 branches:
   only:
+<<<<<<< HEAD
   - models-1
+=======
+  - deployment
+>>>>>>> df061446c8ef235667945a254571b871ad0c3668
 
 after_success:
   - coveralls

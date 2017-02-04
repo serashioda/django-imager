@@ -2,6 +2,10 @@
 source =
     imagersite
     imager_profile
+<<<<<<< HEAD
+=======
+    imager_images
+>>>>>>> df061446c8ef235667945a254571b871ad0c3668
 
 omit = 
     */migrations/*
@@ -9,6 +13,10 @@ omit =
     manage.py
     imagersite/wsgi.py
     */apps.py
+<<<<<<< HEAD
+=======
+    */settings.py
+>>>>>>> df061446c8ef235667945a254571b871ad0c3668
 
 [report]
 show_missing = True

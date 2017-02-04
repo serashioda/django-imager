@@ -1,1 +1,2 @@
-Account Activation for {{ site }}
+Account Activation window closed for {{ site }}. Please re-register at Imager!
+

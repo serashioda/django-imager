@@ -1,0 +1,36 @@
+{% extends 'imagersite/base.html' %}
+{% load thumbnail %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<div class="stacks">
+    {% for album in albums %}
+    <div>
+    <h2>{{ album.title }}</h2>
+    <a href="/albums/{{ album.id }}">
+        <img src="{{ album.cover.image.url }}" />
+    </a>
+    </div>
+    {% endfor %}
+</div>
+
+
+<h2>Photos</h2>
+
+<div class="stacks">
+   {% for photo in photos %}
+    <div>
+    <h3>{{ photo.title }}</h3>
+    <a href="{{ photo.id }}">
+        <img class="stacks" src="{{ photo.image.url }}">
+    </a>
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endif %}
+
+{% endblock %}

@@ -1,3 +1,5 @@
+.DS_Store
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -27,6 +29,7 @@ bin/
 pip-selfcheck.json
 pyvenv.cfg
 share/
+.DS_Store
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -92,4 +95,22 @@ ENV/
 # Rope project settings
 .ropeproject
 
+<<<<<<< HEAD
 .DS_Store
+=======
+# Ignore the files in the Media directory, but not the directory itself
+imagersite/MEDIA/*
+!imagersite/MEDIA/.gitkeep
+
+# PyCharm IDE
+.idea
+
+# Vagrant
+.vagrant
+vagrant_ansible_inventory_default
+
+# Ansible
+*.retry
+external_vars.yml
+
+>>>>>>> df061446c8ef235667945a254571b871ad0c3668

@@ -1,3 +1,6 @@
+
+[![Build Status](https://travis-ci.org/serashioda/django-imager.svg?branch=deployment)](https://travis-ci.org/serashioda/django-imager) [![Coverage Status](https://coveralls.io/repos/github/serashioda/django-imager/badge.svg?branch=deployment)](https://coveralls.io/github/serashioda/django-imager?branch=deployment)
+
 # Django Imager
 
 A simple image management app built on Django.
@@ -10,6 +13,10 @@ by [Sera Smith](https://github.com/serashioda) and [Ben Petty](https://github.co
 - Django
 - PostgreSQL
 - Psycopg2
+<<<<<<< HEAD
+=======
+
+>>>>>>> df061446c8ef235667945a254571b871ad0c3668
 ## Models
 
 The `ImagerProfile` class contains a standard Django user model with additional properties:
@@ -38,6 +45,7 @@ To test with coverage:
 ```bash
 $ coverage run --source='.' manage.py test
 $ coverage report
+<<<<<<< HEAD
 Name                         Stmts   Miss  Cover   Missing
 ----------------------------------------------------------
 imager_profile/__init__.py       0      0   100%
@@ -53,3 +61,6 @@ imagersite/views.py              3      3     0%   3-8
 TOTAL                           86     22    74%
 ```
 
+=======
+```
+>>>>>>> df061446c8ef235667945a254571b871ad0c3668

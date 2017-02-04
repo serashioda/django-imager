@@ -9,8 +9,6 @@ from django.utils.encoding import python_2_unicode_compatible
 from phonenumber_field.modelfields import PhoneNumberField
 import uuid
 
-# Create your models here.
-
 
 class ActiveProfileManager(models.Manager):
     """Model manager for active profiles."""
@@ -29,7 +27,7 @@ class ImagerProfile(models.Model):
     active = ActiveProfileManager()
     user = models.OneToOneField(
         User,
-        related_name="profile",
+        related_name='profile',
         on_delete=models.CASCADE
     )
     CHOICE_PHOTOGRAPHY = (
@@ -80,4 +78,5 @@ def make_profile_for_user(sender, instance, **kwargs):
     """User registers and receives a profile."""
     if kwargs['created']:
         new_profile = ImagerProfile(user=instance)
+        # new_profile.camera = 'N'
         new_profile.save()

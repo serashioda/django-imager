@@ -1,0 +1,25 @@
+{% extends 'imagersite/base.html' %}
+{% load static %}
+{% load thumbnail %}
+
+
+{% block title %} {{profile.user}} - Library {% endblock %}
+
+{% block content %} 
+
+<h2> Albums </h2>
+
+{% if user.is_authenticated %}
+<div class="stacks">
+  {% for album in albums %}
+  <div>
+  <h2>{{ album.title }}</h2>
+  <a href="/albums/{{ album.id }}">
+    <img src="{{ album.cover.image.url }}" />
+  </a>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+{% endblock %}

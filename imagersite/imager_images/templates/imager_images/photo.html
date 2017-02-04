@@ -1,0 +1,18 @@
+{% extends 'imagersite/base.html' %}
+
+{% block content %}
+<h2>Photo: {{ photo.title }}</h2>
+
+<img class="bigphoto" src="{{ photo.image.url }}" />
+
+
+<h4>{{ photo.title }}</h4>
+<p>Description: {{ photo.description }}
+<br />Date Uploaded: {{ photo.date_uploaded }}
+<br />Date Last Modified: {{ photo.date_modified }}
+<br />{{ photo.published }}
+{% if photo.date_published %}
+<br />Date Published: {{ photo.date_published }}
+</p>
+{% endif %}
+{% endblock %}
