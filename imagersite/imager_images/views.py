@@ -46,7 +46,7 @@ def all_albums(request):
     public_albums = []
     albums = Album.objects.all()
     for album in albums:
-        if (album.published != 'private' and
+        if (album.published != 'private' or
                 album.user.username == request.user.username):
             public_albums.append(album)
     return render(
