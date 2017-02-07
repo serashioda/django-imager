@@ -1,5 +1,5 @@
 
-[![Build Status](https://travis-ci.org/serashioda/django-imager.svg?branch=taggit)](https://travis-ci.org/serashioda/django-imager) [![Coverage Status](https://coveralls.io/repos/github/serashioda/django-imager/badge.svg?branch=taggit)](https://coveralls.io/github/serashioda/django-imager?branch=taggit)
+[![Build Status](https://travis-ci.org/serashioda/django-imager.svg?branch=api)](https://travis-ci.org/serashioda/django-imager) [![Coverage Status](https://coveralls.io/repos/github/serashioda/django-imager/badge.svg?branch=api)](https://coveralls.io/github/serashioda/django-imager?branch=api)
 
 # Django Imager
 
