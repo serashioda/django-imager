@@ -23,7 +23,7 @@ script:
 # safelist
 branches:
   only:
-  - deployment
+  - taggit
   
 after_success:
   - coveralls

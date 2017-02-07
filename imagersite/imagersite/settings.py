@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'imager_profile',
     'imagersite',
     'sorl.thumbnail'
-    # 'taggit'
+    'taggit'
 ]
 
 MIDDLEWARE = [
