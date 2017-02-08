@@ -201,7 +201,7 @@ input {
 
 /* HEADER SECTION */
 #h {
-	background: url(/static/images/bg.jpg) no-repeat center top;
+	background: url(/static/images/header.jpg) no-repeat center top;
 	padding-top: 10px;
 	text-align:center;
 	background-attachment: relative;
@@ -359,27 +359,4 @@ input {
 #c p {
 	color: white;
 	font-size: 13px;
-}
-
-/* ---------- NEW STUFF ------------------ */
-
-.stacks {
-    -moz-column-count: 3;
-    -moz-column-gap: 5%;
-    -webkit-column-count: 3;
-    -webkit-column-gap: 5%;
-    column-count: 3;
-    column-gap: 5%;
-    width: 100%;
-    padding-top: 5%;
-    padding-bottom: 5%;
-}
-
-.stacks div {
-    display: inline-block;
-    width: 100%;
-}
-
-.right {
-	text-align: right;
 }
