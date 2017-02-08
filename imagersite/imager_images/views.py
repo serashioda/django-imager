@@ -152,3 +152,39 @@ class EditAlbum(PermissionRequiredMixin, UpdateView):
     model = Album
     fields = ['title', "cover", "description", "photos"]
     success_url = reverse_lazy('library')
+
+class TagListView(ListView):
+    """Listing for tagged photos."""
+    template_name = 'photos/tag_list.html'
+    slug_field_name = 'tag'
+
+    def get_queryset(self):
+        return Photo.objects.filter(tag__slug=self.kwargs.get('tag')).all()
+
+    def get_context_data(self, **kwargs):
+        context = super(TagListView, self).get_context_data(**kwargs)
+        context["tag"] = self.kwargs.get('tag')
+        return context
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

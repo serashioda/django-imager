@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+from django.core.urlresolvers import reverse_lazy
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -32,8 +33,14 @@ ALLOWED_HOSTS = [
 ]
 
 LOGIN_REDIRECT_URL = '/profile'
+# this one is optional
+# LOGIN_REDIRECT_URL = reverse_lazy('two_factor:profile')
+LOGIN_URL = reverse_lazy('two_factor:login')
 
 ACCOUNT_EMAIL_VERIFICATION = 'optional'
+
+
+
 
 # Application definition
 
@@ -47,7 +54,11 @@ INSTALLED_APPS = [
     'imager_images',
     'imager_profile',
     'imagersite',
-    'sorl.thumbnail'
+    'sorl.thumbnail',
+    'django_otp',
+    'django_otp.plugins.otp_static',
+    'django_otp.plugins.otp_totp',
+    'two_factor',
     'taggit'
 ]
 
@@ -87,7 +98,7 @@ WSGI_APPLICATION = 'imagersite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'django_imager',
         'USER': os.environ['USERNAME'],
         'PASSWORD': os.environ['PASSWORD'],
