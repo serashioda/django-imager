@@ -3,7 +3,6 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.http import HttpResponseForbidden
 
-# from django.urls import reverse
 from django.urls import reverse_lazy
 
 from django.views.generic.edit import CreateView
@@ -52,7 +51,7 @@ class PhotoCollectionView(ListView):
     def get_context_data(self):
         """."""
         public_photos = []
-        photos = Photo.objects.all()
+        photos = Photo.objects.all().order_by('-id')
         for photo in photos:
             if photo.published != 'private' or photo.user.username == self.request.user.username:
                 public_photos.append(photo)
@@ -73,7 +72,7 @@ class AlbumCollectionView(ListView):
         public_albums = []
         albums = Album.objects.all()
         for album in albums:
-            if album.published != 'private' and album.user.username == self.request.user.username:
+            if album.published != 'private' or album.user.username == self.request.user.username:
                 public_albums.append(album)
         return {'albums': public_albums}
 
@@ -89,8 +88,8 @@ class LibraryView(ListView):
 
     def get_context_data(self):
         """Library view."""
-        albums = self.request.user.albums.all()
-        photos = self.request.user.photos.all()
+        albums = self.request.user.albums.all().order_by('-id')
+        photos = self.request.user.photos.all().order_by('-id')
         return {'photos': photos, 'albums': albums}
 
     def get_queryset(self):
@@ -153,38 +152,19 @@ class EditAlbum(PermissionRequiredMixin, UpdateView):
     fields = ['title', "cover", "description", "photos"]
     success_url = reverse_lazy('library')
 
+
 class TagListView(ListView):
     """Listing for tagged photos."""
+
     template_name = 'photos/tag_list.html'
     slug_field_name = 'tag'
 
     def get_queryset(self):
+        """."""
         return Photo.objects.filter(tag__slug=self.kwargs.get('tag')).all()
 
     def get_context_data(self, **kwargs):
+        """."""
         context = super(TagListView, self).get_context_data(**kwargs)
         context["tag"] = self.kwargs.get('tag')
         return context
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

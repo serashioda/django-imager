@@ -3,14 +3,8 @@
 
 {% block content %}
 <ul>
-    <h2>{{ user.username }} - Profile</h2>
-    {% for photo in photos %}
-    <li><img src="{{ photo.photo.url }}" /></li>
-    {% endfor %}
-</ul>
-{% endblock %}
+    <h2>{{user.username}} - Profile</h2>
 
-{% block content %}
 <section>
 <h2>Welcome {{user.username}}!</h2>
 <ul>
@@ -31,15 +25,3 @@
 </ul>
 </section>
 {% endblock %}
-
-
-   <!--  
-    bio
-    personal_website
-    hireable
-    address
-    phone 
-    travel_radius
-    camera_type
-    photo_type 
-    active -->

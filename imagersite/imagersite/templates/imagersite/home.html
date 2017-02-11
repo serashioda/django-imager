@@ -3,12 +3,11 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-  {% if user.is_authenticated %}
-  Hello, {{ user.username }}
-  <p>
-    <img src="/static/images/bob.jpg" data-effect="slide-bottom">
-  </p>
-  {% endif %}
-
-
+{% if user.is_authenticated %}
+Hello, {{ user.username }}
+    {% if photo == None %}
+        <img id="randomimg" alt="Random Imager Image" src="/static/images/bob.jpg" />
+    {% else %}
+        <img id="randomimg" alt="Random Imager Image" src="{{ photo.image.url }}" />
+    {% endif %}
 {% endblock %}
