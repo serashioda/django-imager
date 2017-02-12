@@ -201,7 +201,7 @@ input {
 
 /* HEADER SECTION */
 #h {
-	background: url(/static/images/header.jpg) no-repeat center top;
+	background: url(/static/images/bg.jpg) no-repeat center top;
 	padding-top: 10px;
 	text-align:center;
 	background-attachment: relative;
@@ -361,7 +361,7 @@ input {
 	font-size: 13px;
 }
 
-/* ---------- NEW STUFF ------------------ */
+/* ---------- ADDED CSS ------------------ */
 
 .stacks {
     -moz-column-count: 3;
@@ -391,4 +391,24 @@ input {
 	border-style: solid;
 	border-color: white;
 	border-width: 5px;
+}
+@media screen and (max-width: 767px) {
+	#randomimg {
+		width: 90vw;
+	}
+}
+
+input, select, textarea {
+    color: black;
+    padding: 1%;
+}
+
+form {
+	text-align: center;
+}
+
+input[type="file"] {
+	color: white;
+    display: inline;
+    background-color: transparent;
 }
