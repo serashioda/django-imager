@@ -12,6 +12,7 @@
     <a href="/albums/{{ album.id }}">
         <img src="{{ album.cover.image.url }}" />
     </a>
+    <a class="btn" href="/images/albums/{{ album.id }}/edit/"><button type="button" class="btn btn-primary btn-sm">Edit Album</button>
     </div>
     {% endfor %}
 </div>
@@ -20,14 +21,13 @@
 <h2>Photos</h2>
 
 <div class="stacks">
-   {% for photo in photos %}
-    <div>
-    <h3>{{ photo.title }}</h3>
-    <a href="{{ photo.id }}">
-        <img class="stacks" src="{{ photo.image.url }}">
-    </a>
-    </div>
-    {% endfor %}
+{% for photo in photos %}
+<h3>{{ photo.title }}</h3>
+<a href="{{ photo.id }}">
+    <img class="stacks" src="{{ photo.image.url }}">
+</a>
+<a class="btn" href="/images/photos/{{ photo.id }}/edit/"><button type="button" class="btn btn-primary btn-sm">Edit Photo</button>
+{% endfor %}
 </div>
 
 
