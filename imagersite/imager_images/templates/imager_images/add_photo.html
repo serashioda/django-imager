@@ -1,13 +1,46 @@
 {% extends 'imagersite/base.html' %}
+{% block title %}Upload Photo{% endblock %}
 
-{% block header %}
+{% block content %}
+
+
+<h1>Upload Photo</h1>
+<form method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+{% for field in form %}
+<fieldset class="control-group">
+  <label class="control-label" for="id_{{ field.name }}">
+    {{ field.label }}
+  </label>
+  <div class="controls">
+    {{ field }}
+    <p class="help-text">
+      {{ field.help_text }}
+    </p>
+  </div>
+</fieldset>
+{% endfor %}
+<button class="btn btn-lg btn-info btn-theme" type="submit">
+  Upload Photo
+</button>
+</form>
+
+{% endblock %}
+
+
+
+<!-- {% extends 'imagersite/base.html' %}
+{% block title %}Upload Photo{% endblock %}
+
+{% block content %}
+
 
   <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <h2>Add Photo</h2>
       {{ form.as_p}}
-    <button class="btn btn-lg btn-info btn-theme" type="submit">Add</button>
-    <!-- <input type="hidden" name="next" value="/profile/" /> -->
+    <button class="btn btn-lg btn-info btn-theme" type="submit">Add</button> -->
+    <!-- <input type="hidden" name="next" value="/profile/" />
   </form>
 
-{% endblock %}
+{% endblock %} -->
