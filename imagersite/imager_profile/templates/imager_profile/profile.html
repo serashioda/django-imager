@@ -2,6 +2,7 @@
 {% block title %}Profile{% endblock %}
 
 {% block content %}
+
 <ul>
     <h2>{{user.username}} - Profile</h2>
 
@@ -15,12 +16,13 @@
     <li>For Hire: {{user.profile.hireable}}</li>
     <li>Travel Radius: {{user.profile.travel_radius}} Miles</li>
     <li>Phone: {{user.profile.phone}}</li>
-    <li>Address: {{user.profile.address}}</li>
     <li>Choice Photography: {{user.profile.photo_type}}</li>
     <li>Camera: {{user.profile.camera_type}}</li>
+    {% ifequal request.get_full_path '/profile/' %} 
+    <li>Address: {{user.profile.address}}</li>
     <li>Photos Uploaded: {{user.photos.count}}</li>
     <li>Albums Created: {{user.albums.count}}</li>
-    <li>Active Profile?: {{user.profile.active}}</li>
+    <li>Active Profile?: {{user.profile.is_active}}</li>
     {% endifequal %}
 </ul>
 </section>
