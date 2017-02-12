@@ -37,7 +37,7 @@ class PhotoView(ListView):
 
     def get_context_data(self):
         """."""
-        album = Photo.objects.get(id=self.kwargs['photo_id'])
+        photo = Photo.objects.get(id=self.kwargs['photo_id'])
         if photo.published == 'private' and photo.user.username != request.user.username:
             return HttpResponse('Unauthorized, status=401')
         return {'photo': photo}
@@ -128,16 +128,33 @@ class EditPhoto(PermissionRequiredMixin, UpdateView):
 class AddAlbum(PermissionRequiredMixin, CreateView):
     """Add album."""
 
-    login_url = reverse_lazy('login')
     permission_required = "imager_images.add_album"
 
     template_name = "imager_images/add_album.html"
     model = Album
     fields = ['cover', 'title', 'description', 'photos']
     success_url = reverse_lazy('library')
+    # login_url = reverse_lazy('login')
 
     def form_valid(self, form):
         """Form validation for adding album."""
+        form.instance.user = self.request.user
+        return super(AddAlbum, self).form_valid(form)
+
+
+
+class AddAlbum(PermissionRequiredMixin, CreateView):
+    """Add Album."""
+
+    permission_required = "imager_images.add_album"
+
+    template_name = "imager_images/add_album.html"
+    model = Album
+    fields = ['title', "cover", "description", "photos", "published"]
+    success_url = reverse_lazy('library')
+
+    def form_valid(self, form):
+        """Make the form user instance the current user."""
         form.instance.user = self.request.user
         return super(AddAlbum, self).form_valid(form)
 
