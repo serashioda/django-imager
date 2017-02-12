@@ -6,8 +6,12 @@
 {% block content %}
 {% if user.is_authenticated %}
 
+
 <h2> Albums </h2>
 
+<a href="/images/albums/add">
+    <button class="btn btn-lg btn-info btn-register">Add Album</button>
+</a>
 
 <div class="stacks">
     {% for album in albums %}
@@ -22,6 +26,11 @@
 
 
 <h2>Photos</h2>
+
+<a href="/images/photos/add">
+    <button class="btn btn-lg btn-info btn-register">Add Photo</button>
+</a>
+
 
 <div class="stacks">
 {% for photo in photos %}
