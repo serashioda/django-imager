@@ -361,7 +361,7 @@ input {
 	font-size: 13px;
 }
 
-/* ---------- NEW STUFF ------------------ */
+/* ---------- ADDED CSS ------------------ */
 
 .stacks {
     -moz-column-count: 3;
@@ -382,4 +382,33 @@ input {
 
 .right {
 	text-align: right;
+}
+
+#randomimg {
+	margin-top: 5vh;
+	width: 50vw;
+	border-radius: 5%;
+	border-style: solid;
+	border-color: white;
+	border-width: 5px;
+}
+@media screen and (max-width: 767px) {
+	#randomimg {
+		width: 90vw;
+	}
+}
+
+input, select, textarea {
+    color: black;
+    padding: 1%;
+}
+
+form {
+	text-align: center;
+}
+
+input[type="file"] {
+	color: white;
+    display: inline;
+    background-color: transparent;
 }

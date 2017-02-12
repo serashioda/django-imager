@@ -1,5 +1,3 @@
-.DS_Store
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -98,3 +96,15 @@ ENV/
 # Ignore the files in the Media directory, but not the directory itself
 imagersite/MEDIA/*
 !imagersite/MEDIA/.gitkeep
+
+# PyCharm IDE
+.idea
+
+# Vagrant
+.vagrant
+vagrant_ansible_inventory_default
+
+# Ansible
+*.retry
+external_vars.yml
+

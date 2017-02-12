@@ -23,7 +23,7 @@ script:
 # safelist
 branches:
   only:
-  - front-end-3
-
+  - taggit
+  
 after_success:
   - coveralls

@@ -69,6 +69,14 @@ class ProfileTestCase(TestCase):
         query = ImagerProfile.active.all()
         self.assertIsInstance(query[0], ImagerProfile)
 
+    def test_update_profile(self):
+        """Test that a profile update also updates db."""
+        # self.users[0].profile.bio = "This is mo betta."
+        # query = User.objects.first()
+        # self.assertTrue(
+        #     query.profile.bio == "This is mo betta.")
+        pass
+
     def test_inactive_users_have_inactive(self):
         """."""
         this_user = self.users[0]
@@ -89,6 +97,17 @@ class ProfileTestCase(TestCase):
             user = str(self.users[i])
             self.assertTrue('Bob', '@imager.com' in user)
 
+    def test_profile_is_active(self):
+        """Test profile.is_active is active."""
+        for i in range(20):
+            user = self.users[i]
+            self.assertTrue(user.is_active)
+
+    def test_string_returns_profile_info(self):
+        """Test if the string method returns matching profile info."""
+        for i in range(20):
+            user = str(self.users[i])
+            self.assertTrue('Bob', '@imager.com' in user)
 
 # =================== FRONT END TESTS ======================================= #
 

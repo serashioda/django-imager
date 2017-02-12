@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+from django.core.urlresolvers import reverse_lazy
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '8%#4ga*0pn56=k6tlz+s5^zf#i&rykywoz2l(5)o-$6fd*um*n'
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -28,11 +29,18 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
+    '.amazonaws.com'
 ]
 
 LOGIN_REDIRECT_URL = '/profile'
+# this one is optional
+# LOGIN_REDIRECT_URL = reverse_lazy('two_factor:profile')
+LOGIN_URL = reverse_lazy('two_factor:login')
 
 ACCOUNT_EMAIL_VERIFICATION = 'optional'
+
+
+
 
 # Application definition
 
@@ -46,8 +54,12 @@ INSTALLED_APPS = [
     'imager_images',
     'imager_profile',
     'imagersite',
-    'sorl.thumbnail'
-    # 'taggit'
+    'sorl.thumbnail',
+    'django_otp',
+    'django_otp.plugins.otp_static',
+    'django_otp.plugins.otp_totp',
+    'two_factor',
+    'taggit'
 ]
 
 MIDDLEWARE = [
@@ -86,10 +98,11 @@ WSGI_APPLICATION = 'imagersite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'django_imager',
         'USER': os.environ['USERNAME'],
-        'HOST': '127.0.0.1',
+        'PASSWORD': os.environ['PASSWORD'],
+        'HOST': os.environ['HOSTNAME'],
         'PORT': '5432',
         'TEST': {
             'NAME': 'test_imager_db'
@@ -144,12 +157,11 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-EMAIL_HOST_USER = 'imager@gmail.com'
-EMAIL_HOST_PASSWORD = 'notthatpassword'
-DEFAULT_FROM_EMAIL = 'imager@gmail.com'
+EMAIL_HOST_USER = 'imager.ans@gmail.com'
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_PASSWORD']
 
 if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'MEDIA')
 MEDIA_URL = "/media/"

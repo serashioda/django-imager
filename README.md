@@ -1,9 +1,9 @@
 
-[![Build Status](https://travis-ci.org/serashioda/django-imager.svg?branch=front-end-3)](https://travis-ci.org/serashioda/django-imager) [![Coverage Status](https://coveralls.io/repos/github/serashioda/django-imager/badge.svg?branch=front-end-3)](https://coveralls.io/github/serashioda/django-imager?branch=front-end-3)
+[![Build Status](https://travis-ci.org/serashioda/django-imager.svg?branch=taggit)](https://travis-ci.org/serashioda/django-imager) [![Coverage Status](https://coveralls.io/repos/github/serashioda/django-imager/badge.svg?branch=taggit)](https://coveralls.io/github/serashioda/django-imager?branch=taggit)
 
 # Django Imager
 
-A simple image management app using Django.
+A simple image management app built on Django.
 
 by [Sera Smith](https://github.com/serashioda) and [Ben Petty](https://github.com/benpetty)
 
@@ -42,4 +42,19 @@ To test with coverage:
 ```bash
 $ coverage run --source='.' manage.py test
 $ coverage report
+<<<<<<< HEAD
+Name                         Stmts   Miss  Cover   Missing
+----------------------------------------------------------
+imager_profile/__init__.py       0      0   100%
+imager_profile/admin.py          3      0   100%
+imager_profile/models.py        35      2    94%   64, 68
+imager_profile/urls.py           3      3     0%   3-6
+imager_profile/views.py          6      6     0%   2-12
+imagersite/__init__.py           0      0   100%
+imagersite/settings.py          28      0   100%
+imagersite/urls.py               8      8     0%   16-34
+imagersite/views.py              3      3     0%   3-8
+----------------------------------------------------------
+TOTAL                           86     22    74%
 ```
+
