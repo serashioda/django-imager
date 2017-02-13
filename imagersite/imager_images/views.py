@@ -127,7 +127,7 @@ class EditPhoto(PermissionRequiredMixin, UpdateView):
     template_name = "imager_images/add_photo.html"
 
     fields = ['image', 'title', 'description']
-    success_url = reverse_lazy('imager_images: library')
+    success_url = reverse_lazy('library')
 
 
 class AddAlbum(PermissionRequiredMixin, CreateView):
