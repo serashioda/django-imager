@@ -36,9 +36,13 @@ class PhotoView(ListView):
     model = Photo
 
     def get_context_data(self):
-        """."""
+        """Group photos with common tags."""
         photo = Photo.objects.get(id=self.kwargs['photo_id'])
-        if photo.published == 'private' and photo.user.username != request.user.username:
+
+        context = super(PhotoView, self).get_context_data(**self.kwargs)
+        context['tag_photos'] = photo.tags.similar_objects()[:5]
+
+        if photo.published == 'private' and photo.user.username != self.request.user.username:
             return HttpResponse('Unauthorized, status=401')
         return {'photo': photo}
 
@@ -105,8 +109,8 @@ class AddPhoto(PermissionRequiredMixin, CreateView):
 
     template_name = "imager_images/add_photo.html"
     model = Photo
-    fields = ['image', 'title', 'description', 'published']
-    success_url = reverse_lazy('library')
+    fields = ['image', 'title', 'description', 'published', 'tags']
+    success_url = reverse_lazy('imager_images: library')
 
     def form_valid(self, form):
         """Form validation for adding a photo."""
@@ -121,8 +125,8 @@ class EditPhoto(PermissionRequiredMixin, UpdateView):
 
     template_name = "imager_images/add_photo.html"
     model = Photo
-    fields = ['image', 'title', 'description']
-    success_url = reverse_lazy('library')
+    fields = ['image', 'title', 'description', 'tags']
+    success_url = reverse_lazy('imager_images: library')
 
 
 class AddAlbum(PermissionRequiredMixin, CreateView):
@@ -173,15 +177,16 @@ class EditAlbum(PermissionRequiredMixin, UpdateView):
 class TagListView(ListView):
     """Listing for tagged photos."""
 
-    template_name = 'photos/tag_list.html'
+    template_name = 'imager_images/photos.html'
     slug_field_name = 'tag'
 
     def get_queryset(self):
         """."""
-        return Photo.objects.filter(tag__slug=self.kwargs.get('tag')).all()
+        #return Photo.objects.filter(tags__slug=self.kwargs.get('tag')).all()
 
     def get_context_data(self, **kwargs):
         """."""
         context = super(TagListView, self).get_context_data(**kwargs)
         context["tag"] = self.kwargs.get('tag')
+        context["photos"] = Photo.objects.filter(tags__slug=self.kwargs.get('tag')).all()
         return context
