@@ -38,7 +38,8 @@ class PhotoView(ListView):
     def get_context_data(self):
         """."""
         photo = Photo.objects.get(id=self.kwargs['photo_id'])
-        if photo.published == 'private' and photo.user.username != request.user.username:
+
+        if photo.published == 'private' and photo.user.username != self.request.user.username:
             return HttpResponse('Unauthorized, status=401')
         return {'photo': photo}
 
@@ -157,20 +158,3 @@ class EditAlbum(PermissionRequiredMixin, UpdateView):
 
     fields = ['title', "cover", "description", "photos"]
     success_url = reverse_lazy('library')
-
-
-class TagListView(ListView):
-    """Listing for tagged photos."""
-
-    template_name = 'photos/tag_list.html'
-    slug_field_name = 'tag'
-
-    def get_queryset(self):
-        """."""
-        return Photo.objects.filter(tag__slug=self.kwargs.get('tag')).all()
-
-    def get_context_data(self, **kwargs):
-        """."""
-        context = super(TagListView, self).get_context_data(**kwargs)
-        context["tag"] = self.kwargs.get('tag')
-        return context

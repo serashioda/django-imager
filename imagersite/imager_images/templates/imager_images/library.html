@@ -36,7 +36,7 @@
 <div class="stacks">
 {% for photo in photos %}
 <h3>{{ photo.title }}</h3>
-<a href="{{ photo.id }}">
+<a href="/images/photos/{{ photo.id }}">
     <img class="stacks" src="{{ photo.image.url }}">
 </a>
 <a class="btn" href="/images/photos/{{ photo.id }}/edit/"><button type="button" class="btn btn-primary btn-sm">Edit Photo</button>

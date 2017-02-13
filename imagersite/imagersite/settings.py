@@ -40,8 +40,6 @@ LOGIN_URL = reverse_lazy('two_factor:login')
 ACCOUNT_EMAIL_VERIFICATION = 'optional'
 
 
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -59,7 +57,6 @@ INSTALLED_APPS = [
     'django_otp.plugins.otp_static',
     'django_otp.plugins.otp_totp',
     'two_factor',
-    'taggit'
 ]
 
 MIDDLEWARE = [

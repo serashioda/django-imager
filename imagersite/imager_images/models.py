@@ -6,8 +6,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.encoding import python_2_unicode_compatible
 
-from taggit.managers import TaggableManager
-
 
 PUBLISHED_OPTIONS = (
     ('public', 'public'),
@@ -44,7 +42,6 @@ class Photo(models.Model):
     date_modified = models.DateTimeField(auto_now=True)
     date_published = models.DateTimeField(auto_now=True)
     published = models.CharField(max_length=10, choices=PUBLISHED_OPTIONS)
-    tags = TaggableManager()
 
     def __str__(self):
         """String Representation of user media-Photo."""
@@ -74,7 +71,6 @@ class Album(models.Model):
         related_name="album_photo"
     )
     published = models.CharField(max_length=10, choices=PUBLISHED_OPTIONS)
-    # tags = TaggableManager()
 
     def __str__(self):
         """String representation of media-Album."""

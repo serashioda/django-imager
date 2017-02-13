@@ -9,7 +9,6 @@ from django.utils.encoding import python_2_unicode_compatible
 from phonenumber_field.modelfields import PhoneNumberField
 import uuid
 
-from taggit.managers import TaggableManager
 
 class ActiveProfileManager(models.Manager):
     """Model manager for active profiles."""
@@ -56,7 +55,6 @@ class ImagerProfile(models.Model):
     photo_type = models.CharField(
         max_length=100, choices=CHOICE_PHOTOGRAPHY, null=True)
     active = ActiveProfileManager()
-    # tags = TaggableManager()
 
     @property
     def is_active(self):
