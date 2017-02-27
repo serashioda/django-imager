@@ -9,7 +9,7 @@ from django.views.generic.edit import CreateView
 from django.views.generic import ListView, TemplateView, CreateView, UpdateView
 
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.shortcuts import render
 from imager_images.models import Photo, Album
@@ -101,16 +101,16 @@ class LibraryView(ListView):
         return {}
 
 
-class AddPhoto(PermissionRequiredMixin, CreateView):
+class AddPhoto(LoginRequiredMixin, CreateView):
     """Add photo."""
 
     login_url = reverse_lazy('login')
-    permission_required = "imager_images.add_photo"
+    # permission_required = "imager_images.add_photo"
 
     template_name = "imager_images/add_photo.html"
     model = Photo
     fields = ['image', 'title', 'description', 'published', 'tags']
-    success_url = reverse_lazy('imager_images: library')
+    success_url = reverse_lazy('library')
 
     def form_valid(self, form):
         """Form validation for adding a photo."""
@@ -118,21 +118,21 @@ class AddPhoto(PermissionRequiredMixin, CreateView):
         return super(AddPhoto, self).form_valid(form)
 
 
-class EditPhoto(PermissionRequiredMixin, UpdateView):
+class EditPhoto(LoginRequiredMixin, UpdateView):
     """Edit photo."""
 
-    permission_required = "imager_images.change_photo"
+    # permission_required = "imager_images.change_photo"
 
     template_name = "imager_images/add_photo.html"
     model = Photo
     fields = ['image', 'title', 'description', 'tags']
-    success_url = reverse_lazy('imager_images: library')
+    success_url = reverse_lazy('library')
 
 
-class AddAlbum(PermissionRequiredMixin, CreateView):
+class AddAlbum(LoginRequiredMixin, CreateView):
     """Add album."""
 
-    permission_required = "imager_images.add_album"
+    # permission_required = "imager_images.add_album"
 
     template_name = "imager_images/add_album.html"
     model = Album
@@ -147,10 +147,10 @@ class AddAlbum(PermissionRequiredMixin, CreateView):
 
 
 
-class AddAlbum(PermissionRequiredMixin, CreateView):
+class AddAlbum(LoginRequiredMixin, CreateView):
     """Add Album."""
 
-    permission_required = "imager_images.add_album"
+    # permission_required = "imager_images.add_album"
 
     template_name = "imager_images/add_album.html"
     model = Album
@@ -163,10 +163,10 @@ class AddAlbum(PermissionRequiredMixin, CreateView):
         return super(AddAlbum, self).form_valid(form)
 
 
-class EditAlbum(PermissionRequiredMixin, UpdateView):
+class EditAlbum(LoginRequiredMixin, UpdateView):
     """Edit Album."""
 
-    permission_required = "imager_images.change_album"
+    # permission_required = "imager_images.change_album"
 
     template_name = "imager_images/add_album.html"
     model = Album
