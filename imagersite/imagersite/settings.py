@@ -37,7 +37,7 @@ LOGIN_REDIRECT_URL = '/profile'
 # LOGIN_REDIRECT_URL = reverse_lazy('two_factor:profile')
 LOGIN_URL = reverse_lazy('two_factor:login')
 
-ACCOUNT_EMAIL_VERIFICATION = 'optional'
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 
 # Application definition
