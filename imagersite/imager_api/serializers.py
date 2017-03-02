@@ -1,5 +1,4 @@
 """Serializers for RESTful API to expose user’s photos."""
-from django.shortcuts import render
 from rest_framework import serializers
 from imager_images.models import Photo, Album
 
