@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+from django.core.urlresolvers import reverse_lazy
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -32,8 +33,12 @@ ALLOWED_HOSTS = [
 ]
 
 LOGIN_REDIRECT_URL = '/profile'
+# this one is optional
+# LOGIN_REDIRECT_URL = reverse_lazy('two_factor:profile')
+LOGIN_URL = reverse_lazy('login')
 
 ACCOUNT_EMAIL_VERIFICATION = 'optional'
+
 
 # Application definition
 
@@ -47,8 +52,12 @@ INSTALLED_APPS = [
     'imager_images',
     'imager_profile',
     'imagersite',
-    'sorl.thumbnail'
-    'taggit'
+    'sorl.thumbnail',
+    'django_otp',
+    'django_otp.plugins.otp_static',
+    'django_otp.plugins.otp_totp',
+    'two_factor',
+    'taggit',
 ]
 
 MIDDLEWARE = [
@@ -87,7 +96,7 @@ WSGI_APPLICATION = 'imagersite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'django_imager',
         'USER': os.environ['USERNAME'],
         'PASSWORD': os.environ['PASSWORD'],
@@ -150,6 +159,8 @@ EMAIL_HOST_USER = 'imager.ans@gmail.com'
 EMAIL_HOST_PASSWORD = os.environ['EMAIL_PASSWORD']
 
 if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'MEDIA')

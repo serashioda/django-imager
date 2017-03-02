@@ -1,15 +1,23 @@
 {% extends 'imagersite/base.html' %}
 {% load thumbnail %}
 
-{% block content %}
+{% block title %}Library{% endblock %}
 
+{% block content %}
 {% if user.is_authenticated %}
+
+
+<h2> Albums </h2>
+
+<a href="/images/albums/add">
+    <button class="btn btn-lg btn-info btn-register">Add Album</button>
+</a>
 
 <div class="stacks">
     {% for album in albums %}
     <div>
     <h2>{{ album.title }}</h2>
-    <a href="/albums/{{ album.id }}">
+    <a href="/images/albums/{{ album.id }}">
         <img src="{{ album.cover.image.url }}" />
     </a>
     </div>
@@ -19,18 +27,29 @@
 
 <h2>Photos</h2>
 
+<a href="/images/photos/add">
+    <button class="btn btn-lg btn-info btn-register">Add Photo</button>
+</a>
+
+
 <div class="stacks">
-   {% for photo in photos %}
-    <div>
-    <h3>{{ photo.title }}</h3>
-    <a href="{{ photo.id }}">
-        <img class="stacks" src="{{ photo.image.url }}">
-    </a>
+{% for photo in photos %}
+<h3>{{ photo.title }}</h3>
+<a href="/images/photos/{{ photo.id }}">
+    <img class="stacks" src="{{ photo.image.url }}">
+</a>
+<div class="panel-footer">{{photo.description}}</div>
+    {% if photo.tags.all %}
+    <div class="panel-footer tag_footer">
+        {% for tag in photo.tags.all %}
+            <a class='tag' href="{% url "tag_list" tag.slug %}">{{ tag }}</a>
+        {% endfor %}
     </div>
-    {% endfor %}
+    {% endif %}
+<a class="btn" href="/images/photos/{{ photo.id }}/edit/"><button type="button" class="btn btn-primary btn-sm">Edit Photo</button>
+{% endfor %}
 </div>
 
 
 {% endif %}
-
 {% endblock %}

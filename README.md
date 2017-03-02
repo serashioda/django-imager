@@ -42,7 +42,6 @@ To test with coverage:
 ```bash
 $ coverage run --source='.' manage.py test
 $ coverage report
-<<<<<<< HEAD
 Name                         Stmts   Miss  Cover   Missing
 ----------------------------------------------------------
 imager_profile/__init__.py       0      0   100%

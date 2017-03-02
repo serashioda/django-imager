@@ -44,7 +44,7 @@ class Photo(models.Model):
     date_modified = models.DateTimeField(auto_now=True)
     date_published = models.DateTimeField(auto_now=True)
     published = models.CharField(max_length=10, choices=PUBLISHED_OPTIONS)
-    # tags = TaggableManager()
+    tags = TaggableManager()
 
     def __str__(self):
         """String Representation of user media-Photo."""
