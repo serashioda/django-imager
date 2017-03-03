@@ -14,6 +14,6 @@ urlpatterns = [
     url(r'^albums/(?P<pk>\d+)/edit/$', EditAlbum.as_view(), name='edit_album'),
     url(r'^albums/$', AlbumCollectionView.as_view(), name='list_albums'),
     url(r'^photos/$', PhotoCollectionView.as_view(), name='list_photos'),
-    url(r'^tagged/(?P<tag>[\w-]+)/$', TagListView.as_view(), name='tag_list'),
+    url(r'^tagged/(?P<tag>[-\w]+)/$', TagListView.as_view(), name='tag_list'),
     # url(r'', include('two_factor.urls', 'two_factor')),
 ]

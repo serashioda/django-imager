@@ -37,14 +37,15 @@ class PhotoView(ListView):
 
     def get_context_data(self):
         """Group photos with common tags."""
-        photo = Photo.objects.get(id=self.kwargs['photo_id'])
+        photo = Photo.objects.get(id=self.kwargs.get('pk'))
 
-        context = super(PhotoView, self).get_context_data(**self.kwargs)
-        context['tag_photos'] = photo.tags.similar_objects()[:5]
+        common_tag_photos = Photo.published_photos.filter(
+            tags__in=photo.tags.all()
+        ).exclude(
+            id=self.kwargs.get("pk")
+        ).distinct()
 
-        if photo.published == 'private' and photo.user.username != self.request.user.username:
-            return HttpResponse('Unauthorized, status=401')
-        return {'photo': photo}
+        return {'common_tag_photos': common_tag_photos[:5], 'photo': photo}
 
 
 class PhotoCollectionView(ListView):
@@ -92,9 +93,11 @@ class LibraryView(ListView):
 
     def get_context_data(self):
         """Library view."""
-        albums = self.request.user.albums.all().order_by('-id')
-        photos = self.request.user.photos.all().order_by('-id')
-        return {'photos': photos, 'albums': albums}
+        user = self.request.user
+        albums = user.albums.all().order_by('-id')
+        photos = user.photos.all().order_by('-id')
+        tag_list = Photo.tags.all()
+        return {'photos': photos, 'albums': albums, 'tags': tag_list}
 
     def get_queryset(self):
         """."""
@@ -105,8 +108,6 @@ class AddPhoto(LoginRequiredMixin, CreateView):
     """Add photo."""
 
     login_url = reverse_lazy('login')
-    # permission_required = "imager_images.add_photo"
-
     template_name = "imager_images/add_photo.html"
     model = Photo
     fields = ['image', 'title', 'description', 'published', 'tags']
@@ -120,8 +121,6 @@ class AddPhoto(LoginRequiredMixin, CreateView):
 
 class EditPhoto(LoginRequiredMixin, UpdateView):
     """Edit photo."""
-
-    # permission_required = "imager_images.change_photo"
 
     template_name = "imager_images/add_photo.html"
     model = Photo
@@ -146,11 +145,8 @@ class AddAlbum(LoginRequiredMixin, CreateView):
         return super(AddAlbum, self).form_valid(form)
 
 
-
 class AddAlbum(LoginRequiredMixin, CreateView):
     """Add Album."""
-
-    # permission_required = "imager_images.add_album"
 
     template_name = "imager_images/add_album.html"
     model = Album
@@ -177,16 +173,16 @@ class EditAlbum(LoginRequiredMixin, UpdateView):
 class TagListView(ListView):
     """Listing for tagged photos."""
 
-    template_name = 'imager_images/photos.html'
+    template_name = 'imager_images/user_tag_list.html'
     slug_field_name = 'tag'
 
     def get_queryset(self):
         """."""
-        #return Photo.objects.filter(tags__slug=self.kwargs.get('tag')).all()
+        return Photo.objects.filter(tags__slug=self.kwargs.get('slug')).all()
 
     def get_context_data(self, **kwargs):
         """."""
         context = super(TagListView, self).get_context_data(**kwargs)
-        context["tag"] = self.kwargs.get('tag')
-        context["photos"] = Photo.objects.filter(tags__slug=self.kwargs.get('tag')).all()
+        context['tag'] = self.kwargs.get('slug')
+        context['photos'] = Photo.objects.filter(tags__slug=self.kwargs.get('slug')).all()
         return context
