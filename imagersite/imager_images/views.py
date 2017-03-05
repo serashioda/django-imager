@@ -24,9 +24,15 @@ class AlbumView(ListView):
     def get_context_data(self):
         """."""
         album = Album.objects.get(id=self.kwargs['album_id'])
+        photos = album.photos.all()
+        tag_set = set()
         if album.published == 'private' and album.user.username != request.user.username:
             return HttpResponse('Unauthorized, status=401')
-        return {'album': album}
+        for photo in photos:
+            for tag in photo.tags.all():
+                tag_set.add(tag)
+                
+        return {'tags': tag_set, 'album': album}
 
 
 class PhotoView(ListView):
