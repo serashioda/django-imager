@@ -37,8 +37,8 @@ LOGIN_REDIRECT_URL = '/profile'
 # LOGIN_REDIRECT_URL = reverse_lazy('two_factor:profile')
 LOGIN_URL = reverse_lazy('two_factor:login')
 
-ACCOUNT_EMAIL_VERIFICATION = 'none'
-
+ACCOUNT_EMAIL_VERIFICATION = 'required'
+EMAIL_VERIFICATION = False
 
 # Application definition
 
@@ -155,10 +155,10 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 EMAIL_HOST_USER = 'imager.ans@gmail.com'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+SERVER_EMAIL = EMAIL_HOST_USER
 EMAIL_HOST_PASSWORD = os.environ['EMAIL_PASSWORD']
-
-if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'MEDIA')
 MEDIA_URL = "/media/"
