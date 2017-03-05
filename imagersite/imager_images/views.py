@@ -34,7 +34,7 @@ class PhotoView(ListView):
     template_name = 'imager_images/photo.html'
 
     def get_context_data(self):
-        """"""Get private photo objects for PhotoView."""
+        """Get private photo objects for PhotoView."""
         photo = Photo.objects.get(id=self.kwargs['photo_id'])
 
         if photo.published == 'private' and photo.user.username != self.request.user.username:
