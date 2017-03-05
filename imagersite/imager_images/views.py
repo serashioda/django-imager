@@ -22,7 +22,7 @@ class AlbumView(ListView):
     def get_context_data(self):
         """Get private album objects for AlbumView."""
         album = Album.objects.get(id=self.kwargs['album_id'])
-        if album.published == 'private' and album.user.username != request.user.username:
+        if album.published == 'private' and album.user.username != self.request.user.username:
             return HttpResponse('Unauthorized, status=401')
         return {'album': album}
 
