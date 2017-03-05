@@ -9,17 +9,17 @@
 
 <h2> Albums </h2>
 
-<!-- {% if user.is_authenticated %} -->
 <div class="stacks">
   {% for album in albums %}
   <div>
   <h2>{{ album.title }}</h2>
+  <p>Description: {{ album.description }}
   <a href="/images/albums/{{ album.id }}">
     <img src="{{ album.cover.image.url }}" />
   </a>
+  </p>
   </div>
   {% endfor %}
 </div>
-<!-- {% endif %} -->
 
 {% endblock %}
