@@ -30,6 +30,9 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
 ]
 
+LOGIN_REDIRECT_URL = '/profile'
+
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
 
 # Application definition
 
@@ -131,7 +134,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = '/'
 
 ACCOUNT_ACTIVATION_DAYS = 7
 
@@ -141,7 +144,6 @@ EMAIL_USE_TLS = True
 
 EMAIL_HOST_USER = 'imager.ans@gmail.com'
 EMAIL_HOST_PASSWORD = os.environ['EMAIL_PASSWORD']
-# DEFAULT_FROM_EMAIL = 'imager@gmail.com'
 
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
