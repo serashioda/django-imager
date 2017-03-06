@@ -1,11 +1,10 @@
 """Imager Profile Tests."""
 
-from django.test import TestCase
+from django.test import TestCase, Client, RequestFactory
 from django.contrib.auth.models import User
 from imager_profile.models import ImagerProfile
-import factory
 
-# Create your tests here.
+import factory
 
 
 class ProfileTestCase(TestCase):
@@ -19,7 +18,7 @@ class ProfileTestCase(TestCase):
 
             model = User
 
-        username = factory.Sequence(lambda n: "Pho To Combo {}".format(n))
+        username = factory.Sequence(lambda n: "Bob {}".format(n))
         email = factory.LazyAttribute(
             lambda x: "{}@imager.com".format(x.username.replace(" ", ""))
         )
@@ -29,15 +28,13 @@ class ProfileTestCase(TestCase):
         self.users = [self.UserFactory.create() for i in range(20)]
 
     def test_profile_created(self):
-        """Test that profile is created once user is saved."""
+        """Test that ImagerProfile object is created once user is saved."""
         self.assertTrue(ImagerProfile.objects.count() == 20)
 
     def test_model_string(self):
-        """Ensure each models has a string representation that
-        appropriately displays when using the Django shell.
-        """
+        """Ensure each models has a string representation in Django shell."""
         for i in range(20):
-            self.assertIs(self.users[i].username, str(self.users[i]))
+            self.assertEqual(self.users[i].username, str(self.users[i]))
 
     def test_user_gets_imgr_profile(self):
         """Test User gets Imager Profile.
@@ -57,27 +54,97 @@ class ProfileTestCase(TestCase):
         self.assertIsInstance(profile.user, User)
 
     def test_model_manager_returns_active_profiles(self):
-        """Test that active model manager returns query set of active profiles."""
+        """Active model manager should return query set of active profiles."""
         query = ImagerProfile.active.all()
         self.assertIsInstance(query[0], ImagerProfile)
 
-    def test_update_profile(self):
-        """Test that a profile update also updates db."""
-        user = self.users[0]
-        user.profile.bio = "I am updating my bio because this is mo betta."
-        query = User.objects.first()
-        self.assertTrue(query.profile.bio == "I am updating my bio because this is mo betta.")
+    def test_inactive_users_have_inactive(self):
+        """."""
+        this_user = self.users[0]
+        this_user.is_active = False
+        this_user.save()
+        self.assertTrue(
+            ImagerProfile.active.count() == User.objects.count() - 1)
 
-    def test_del_user_on_db_and_profile(self):
-        """Test delete user on DB & Imgr.
+    def test_profile_is_active(self):
+        """Test profile.is_active is active."""
+        for i in range(20):
+            user = self.users[i]
+            self.assertTrue(user.is_active)
 
-        Ensure that if a user is deleted from the database, the ImagerProfile
-        associated with that user is also deleted.
-        """
-        pass
+    def test_string_returns_profile_info(self):
+        """Test if the string method returns matching profile info."""
+        for i in range(20):
+            user = str(self.users[i])
+            self.assertTrue('Bob', '@imager.com' in user)
 
-    # def test_profile_is_active(self):
-    #     """Test profile.is_active is active."""
-    #     for i in range(20):
-    #         user = self.users[i]
-    #         # self.assertTrue(user.is_active)
+
+# =================== FRONT END TESTS ======================================= #
+
+
+class ProfileFrontEndTests(TestCase):
+    """Testing for front end tests."""
+
+    class UserFactory(factory.django.DjangoModelFactory):
+        """Factory for building new user objects."""
+
+        class Meta:
+            """Setup factory model."""
+
+            model = User
+
+        username = factory.Sequence(lambda n: "Bob {}".format(n))
+        email = factory.LazyAttribute(
+            lambda x: "{}@foo.com".format(x.username.replace(" ", ""))
+        )
+
+    def setUp(self):
+        """."""
+        self.client = Client()
+        self.request = RequestFactory()
+
+    def test_how_view_is_status_ok(self):
+        """."""
+        from imagersite.views import home_view
+        # from imager_profile.views import home_view
+        req = self.request.get("/potato")
+        response = home_view(req)
+        self.assertTrue(response.status_code == 200)
+
+    def test_home_route_is_status_ok(self):
+        """."""
+        response = self.client.get("/")
+        self.assertTrue(response.status_code == 200)
+
+    def test_home_route_uses_right_templates(self):
+        """."""
+        response = self.client.get("/")
+        self.assertTemplateUsed(response, "imagersite/home.html")
+
+    def test_login_route_redirects(self):
+        """Test login route redirects."""
+        new_user = self.UserFactory.create()
+        new_user.username = "potato_joe"
+        new_user.set_password("tugboats")
+        new_user.save()
+        # import pdb; pdb.set_trace()
+        response = self.client.post("/login/", {
+            "username": new_user.username,
+            "password": "tugboats"
+        })
+        self.assertTrue(response.status_code == 302)
+
+    def test_login_route_redirects_to_homepage(self):
+        """Test login route redirects to homepage."""
+        new_user = self.UserFactory.create()
+        new_user.username = "potato_joe"
+        new_user.set_password("tugboats")
+        new_user.save()
+        # import pdb; pdb.set_trace()
+        response = self.client.post("/login/", {
+            "username": new_user.username,
+            "password": "tugboats"
+        }, follow=True)
+        self.assertRedirects(
+            response, "/", status_code=302, target_status_code=200
+        )

@@ -141,7 +141,6 @@ EMAIL_USE_TLS = True
 
 EMAIL_HOST_USER = 'imager.ans@gmail.com'
 EMAIL_HOST_PASSWORD = os.environ['EMAIL_PASSWORD']
-# DEFAULT_FROM_EMAIL = 'imager@gmail.com'
 
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
