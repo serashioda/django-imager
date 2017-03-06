@@ -55,7 +55,7 @@ class ImagerProfile(models.Model):
     photo_type = models.CharField(
         max_length=100, choices=CHOICE_PHOTOGRAPHY, null=True)
     is_active = ActiveProfileManager()
-    is_active = models.BooleanField(default=True)
+    # is_active = models.BooleanField(default=True)
 
     @property
     def is_active(self):
