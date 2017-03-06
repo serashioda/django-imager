@@ -52,7 +52,7 @@ class ImagerProfile(models.Model):
     travel_radius = models.DecimalField(max_digits=5, decimal_places=2, null=True)
     camera_type = models.CharField(max_length=50, choices=CHOICE_CAMERA)
     photo_type = models.CharField(max_length=100, choices=CHOICE_PHOTOGRAPHY)
-    active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True)
 
     @property
     def is_active(self):

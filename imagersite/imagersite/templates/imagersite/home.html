@@ -1,13 +1,14 @@
-{% extends 'base.html' %}
+{% extends 'imagersite/base.html' %}
 
-{% block title %}Register{% endblock %}
-{% load static %}
-{% block css %}<link href="{% static '#' %}" rel="stylesheet">{% endblock %}
+{% block title %}Home{% endblock %}
 
-{% block body %}
-<div class="container">
-    <h1>Create Profile</h1>
-    <p>And add your fun facts.</p>
-    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
-</div>
+{% block content %}
+{% if user.is_authenticated %}
+Hello, {{ user.username }}
+    {% if photo == None %}
+        <img id="randomimg" alt="Random Imager Image" src="/static/images/bob.jpg" />
+    {% else %}
+        <img id="randomimg" alt="Random Imager Image" src="{{ photo.image.url }}" />
+    {% endif %}
+{% endif %}
 {% endblock %}
