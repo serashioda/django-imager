@@ -26,7 +26,7 @@ class AlbumView(ListView):
         album = Album.objects.get(id=self.kwargs['album_id'])
         photos = album.photos.all()
         tag_set = set()
-        if album.published == 'private' and album.user.username != request.user.username:
+        if album.published == 'private' and album.user.username != self.request.user.username:
             return HttpResponse('Unauthorized, status=401')
         for photo in photos:
             for tag in photo.tags.all():
@@ -43,12 +43,12 @@ class PhotoView(ListView):
 
     def get_context_data(self):
         """Group photos with common tags."""
-        photo = Photo.objects.get(id=self.kwargs.get('pk'))
+        photo = Photo.objects.get(id=self.kwargs.get('photo_id'))
 
-        common_tag_photos = Photo.published_photos.filter(
+        common_tag_photos = Photo.objects.filter(
             tags__in=photo.tags.all()
         ).exclude(
-            id=self.kwargs.get("pk")
+            id=self.kwargs.get("photo_id")
         ).distinct()
 
         return {'common_tag_photos': common_tag_photos[:5], 'photo': photo}
