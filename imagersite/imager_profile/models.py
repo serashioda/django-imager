@@ -9,8 +9,6 @@ from django.utils.encoding import python_2_unicode_compatible
 from phonenumber_field.modelfields import PhoneNumberField
 import uuid
 
-# Create your models here.
-
 
 class ActiveProfileManager(models.Manager):
     """Model manager for active profiles."""
