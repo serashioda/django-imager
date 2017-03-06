@@ -7,7 +7,7 @@
 
 <div class="stacks">
 {% for photo in photos %}
-<a href="{{ photo.id }}">
+<a href="/images/photos/{{ photo.id }}">
   <img class="stacks" src="{{ photo.image.url }}">
 </a>
 {% endfor %}

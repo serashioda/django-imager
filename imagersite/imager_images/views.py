@@ -24,9 +24,16 @@ class AlbumView(ListView):
     def get_context_data(self):
         """."""
         album = Album.objects.get(id=self.kwargs['album_id'])
-        if album.published == 'private' and album.user.username != request.user.username:
+        if album.published == 'private' and album.user.username != self.request.user.username:
             return HttpResponse('Unauthorized, status=401')
-        return {'album': album}
+
+        tags = []
+        for p in album.photos.all():
+            for tag in p.tags.all():
+                if tag not in tags:
+                    tags.append(tag)
+
+        return {'album': album, 'tags': tags}
 
 
 class PhotoView(ListView):
@@ -44,7 +51,7 @@ class PhotoView(ListView):
 
         if photo.published == 'private' and photo.user.username != self.request.user.username:
             return HttpResponse('Unauthorized, status=401')
-        return {'photo': photo}
+        return {'photo': photo, 'tag_photos': context['tag_photos']}
 
 
 class PhotoCollectionView(ListView):
@@ -120,9 +127,7 @@ class AddPhoto(LoginRequiredMixin, CreateView):
 
 class EditPhoto(LoginRequiredMixin, UpdateView):
     """Edit photo."""
-
     # permission_required = "imager_images.change_photo"
-
     template_name = "imager_images/add_photo.html"
     model = Photo
     fields = ['image', 'title', 'description', 'tags']
