@@ -1,10 +1,10 @@
-"""Imager models."""
+"""Imager profile models."""
 
+from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_save
-from django.contrib.auth.models import User
-from django.utils.encoding import python_2_unicode_compatible
 from django.dispatch import receiver
+from django.utils.encoding import python_2_unicode_compatible
 
 from phonenumber_field.modelfields import PhoneNumberField
 import uuid
@@ -17,7 +17,8 @@ class ActiveProfileManager(models.Manager):
 
     def get_queryset(self):
         """Return query set of active users."""
-        return super(ActiveProfileManager, self).get_queryset().filter(user__is_active__exact=True)
+        return super(ActiveProfileManager, self).get_queryset().filter(
+            user__is_active__exact=True)
 
 
 @python_2_unicode_compatible
@@ -48,11 +49,14 @@ class ImagerProfile(models.Model):
     personal_website = models.URLField(max_length=200)
     hireable = models.BooleanField(default=True)
     address = models.CharField(max_length=255, blank=True, null=True)
-    phone = PhoneNumberField()
-    travel_radius = models.DecimalField(max_digits=5, decimal_places=2, null=True)
-    camera_type = models.CharField(max_length=50, choices=CHOICE_CAMERA)
-    photo_type = models.CharField(max_length=100, choices=CHOICE_PHOTOGRAPHY)
-    active = models.BooleanField(default=True)
+    phone = PhoneNumberField(null=True)
+    travel_radius = models.DecimalField(
+        max_digits=5, decimal_places=2, null=True)
+    camera_type = models.CharField(
+        max_length=50, choices=CHOICE_CAMERA, null=True)
+    photo_type = models.CharField(
+        max_length=100, choices=CHOICE_PHOTOGRAPHY, null=True)
+    active = ActiveProfileManager()
 
     @property
     def is_active(self):
@@ -61,8 +65,14 @@ class ImagerProfile(models.Model):
 
     def __str__(self):
         """Display profile data as string."""
-        return "User: {}, User ID: {}, About: {}, Personal Website: {}, For Hire? {}, Address: {}, Phone Number: {}, Travel Radius: {}, Camera: {}, Photography Type: {}, Active? {}".format(
-            self.user, self.imager_id, self.bio, self.personal_website, self.hireable, self.address, self.phone, self.travel_radius, self.camera_type, self.photo_type, self.is_active)
+        return ("User: {}, User ID: {}, About: {}, Personal Website: {}, " +
+                "For Hire? {}, Address: {}, Phone Number: {}, " +
+                "Travel Radius: {}, Camera: {}, Photography Type: {}, " +
+                "Active? {}".format(
+                    self.user, self.imager_id, self.bio, self.personal_website,
+                    self.hireable, self.address, self.phone,
+                    self.travel_radius, self.camera_type, self.photo_type,
+                    self.is_active))
 
 
 @receiver(post_save, sender=User)
