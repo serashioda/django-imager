@@ -79,4 +79,5 @@ def make_profile_for_user(sender, instance, **kwargs):
     """User registers and receives a profile."""
     if kwargs['created']:
         new_profile = ImagerProfile(user=instance)
+        # new_profile.camera = 'N'
         new_profile.save()

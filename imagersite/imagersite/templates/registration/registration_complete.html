@@ -1,8 +1,9 @@
 {% extends 'imagersite/base.html' %}
 
+
 {% block title %}Registration Complete{% endblock %}
 
-{% block content %}
+{% block header %}
     <h2>You have registered your profile. You will receive a confirmation email shortly.</h2>
-    <h2> You have 7 days to activate!</h2>
+    <h2> You have {{ expiration_days }} days to activate!</h2>
 {% endblock %}
