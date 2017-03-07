@@ -14,7 +14,7 @@
 
   <link href="/static/css/normalize.css" rel="stylesheet">
   <link href="/static/css/bootstrap.css" rel="stylesheet">
-<!--   <link href="/static/css/custom-animations.css" rel="stylesheet"> -->
+  <!-- <link href="/static/css/custom-animations.css" rel="stylesheet"> -->
   <link href="/static/css/style.css" rel="stylesheet">
 </head>
 
@@ -23,51 +23,58 @@
   <header id="h">
     <div class="container">
       <div class="row right">
-          {% if user.is_authenticated %}
+        {% if user.is_authenticated %}
           Hello, <a href="/profile/">{{ user.username }}</a>
-          {% endif %}
-        </div>
-        
-        <nav class="row">
+        {% endif %}
+      </div>
+       <!--  {% if user.is_authenticated %}
+          Hello, <a href="/profile/{{ user.username }}">{{ user.username }}</a>
+        {% endif %}
+      </div> -->
 
-          {% if user.is_authenticated %}
-          <a href="{% url 'logout' %}">
-            <button class="btn btn-lg btn-info btn-register">
-              Logout
-            </button>
-          </a>
+      <nav class="row">
+
+        {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}">
+          <button class="btn btn-lg btn-info btn-register">
+            Logout
+          </button>
+        </a>
 
 
-          {% else %}
-          <a href="{% url 'registration_register' %}">
-            <button class="btn btn-lg btn-info btn-register">
-              Register
-            </button>
-          </a>
-          <a href="{% url 'login' %}">
-            <button class="btn btn-lg btn-info btn-register">
-              Login
-            </button>
-          </a>
+        {% else %}
+        <a href="{% url 'registration_register' %}">
+          <button class="btn btn-lg btn-info btn-register">
+            Register
+          </button>
+        </a>
+        <a href="{% url 'login' %}">
+          <button class="btn btn-lg btn-info btn-register">
+            Login
+          </button>
+        </a>
 
-          {% endif %}
-          <a href="{% url 'home' %}">
-            <button class="btn btn-lg btn-info btn-register">
-              Home
-            </button>
-          </a>
-        </nav>
+        {% endif %}
+        <a href="{% url 'home' %}">
+          <button class="btn btn-lg btn-info btn-register">
+            Home
+          </button>
+        </a>
+      </nav>
 
 <!-- . . . . . . . .CONTENT . . . . . . . . . . . . . . .  . -->
+
       <div class="row">
-        <div class="col-md-10 col-md-offset-1 mt">
-          <h1 class="mb">Imager</h1>
-          <h3>Image Management System</h3>
-        </div>
-        <content class="col-md-12 mt">
-          {% block content %}
+      <div class="col-md-10 col-md-offset-1 mt">
+        <h3>Image Management System</h3>
+        <h1 class="mb">Imager</h1>
+      </div>
+        <div class="row">
+          <content class="col-md-12 mt">
+          {% block header %}
           {% endblock %}
-        </content>
+          </content>
+        </div>
       </div>
     </div>
   </header>
@@ -84,8 +91,13 @@
     </div>
   </footer>
 
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
   <script src="/static/js/jquery.min.js"></script>
   <script src="/static/js/bootstrap.min.js"></script>
+  <script src="/static/js/retina-1.1.0.js"></script>
+  <script src="/static/js/jquery.unveilEffects.js"></script>
 
 </body>
 </html>

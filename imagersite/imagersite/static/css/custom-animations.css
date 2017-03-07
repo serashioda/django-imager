@@ -1,8 +1,6 @@
 /*CUSTOM ANIMATIONS*/
 
 /* Please Note: To use this CSS, you should include in your HTML the proper javascript: jquery.unveilEffects.js */
-
-
     [class*=".effect-"] {
       -webkit-backface-visibility: hidden;
       -moz-backface-visibility: hidden;
