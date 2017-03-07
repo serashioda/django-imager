@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'imager_profile',
     'bootstrap3',
     'imagersite',
+    'django_nose'
 ]
 
 MIDDLEWARE = [
@@ -93,6 +94,13 @@ DATABASES = {
     }
 }
 
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-package=imagersite,imager_profile',
+]
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
