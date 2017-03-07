@@ -56,7 +56,7 @@ class ProfileTestCase(TestCase):
 
     def test_model_manager_returns_active_profiles(self):
         """Active model manager should return query set of active profiles."""
-        query = ImagerProfile.active.all()
+        query = ImagerProfile.is_active.all()
         self.assertIsInstance(query[0], ImagerProfile)
 
     def test_inactive_users_have_inactive(self):
@@ -65,7 +65,7 @@ class ProfileTestCase(TestCase):
         this_user.is_active = False
         this_user.save()
         self.assertTrue(
-            ImagerProfile.active.count() == User.objects.count() - 1)
+            ImagerProfile.is_active.count() == User.objects.count() - 1)
 
     # def test_update_profile(self):
     #     """Test that a profile update also updates db."""
