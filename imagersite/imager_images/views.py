@@ -9,7 +9,7 @@ from django.views.generic.edit import CreateView
 from django.views.generic import ListView, TemplateView, CreateView, UpdateView
 
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.shortcuts import render
 from imager_images.models import Photo, Album
@@ -24,9 +24,16 @@ class AlbumView(ListView):
     def get_context_data(self):
         """."""
         album = Album.objects.get(id=self.kwargs['album_id'])
-        if album.published == 'private' and album.user.username != request.user.username:
+        if album.published == 'private' and album.user.username != self.request.user.username:
             return HttpResponse('Unauthorized, status=401')
-        return {'album': album}
+
+        tags = []
+        for p in album.photos.all():
+            for tag in p.tags.all():
+                if tag not in tags:
+                    tags.append(tag)
+
+        return {'album': album, 'tags': tags}
 
 
 class PhotoView(ListView):
@@ -41,7 +48,7 @@ class PhotoView(ListView):
 
         if photo.published == 'private' and photo.user.username != self.request.user.username:
             return HttpResponse('Unauthorized, status=401')
-        return {'photo': photo}
+        return {'photo': photo, 'tag_photos': context['tag_photos']}
 
 
 class PhotoCollectionView(ListView):
@@ -100,17 +107,17 @@ class LibraryView(ListView):
         return {}
 
 
-class AddPhoto(PermissionRequiredMixin, CreateView):
+class AddPhoto(LoginRequiredMixin, CreateView):
     """Add photo."""
 
     login_url = reverse_lazy('login')
-    permission_required = "imager_images.add_photo"
 
     model = Photo
-    template_name = "imager_images/add_photo.html"
 
-    fields = ['image', 'title', 'description', 'published']
-    success_url = reverse_lazy('imager_images: library')
+    # template_name = "imager_images/add_photo.html"
+
+    fields = ['image', 'title', 'description', 'published', 'tags']
+    success_url = reverse_lazy('library')
 
     def form_valid(self, form):
         """Form validation for adding a photo."""
@@ -118,28 +125,25 @@ class AddPhoto(PermissionRequiredMixin, CreateView):
         return super(AddPhoto, self).form_valid(form)
 
 
-class EditPhoto(PermissionRequiredMixin, UpdateView):
+class EditPhoto(LoginRequiredMixin, UpdateView):
     """Edit photo."""
 
-    permission_required = "imager_images.change_photo"
-
-    model = Photo
     template_name = "imager_images/add_photo.html"
+    model = Photo
+    fields = ['image', 'title', 'description', 'tags']
 
-    fields = ['image', 'title', 'description']
     success_url = reverse_lazy('library')
 
 
-class AddAlbum(PermissionRequiredMixin, CreateView):
+class AddAlbum(LoginRequiredMixin, CreateView):
     """Add album."""
 
-    login_url = reverse_lazy('login')
-    permission_required = "imager_images.add_album"
+    # login_url = reverse_lazy('login')
 
-    model = Album
     template_name = "imager_images/add_album.html"
+    model = Album
 
-    fields = ['cover', 'title', 'description', 'photos']
+    fields = ['cover', 'title', 'description', 'photos', 'published']
     success_url = reverse_lazy('library')
 
     def form_valid(self, form):
@@ -148,10 +152,8 @@ class AddAlbum(PermissionRequiredMixin, CreateView):
         return super(AddAlbum, self).form_valid(form)
 
 
-class EditAlbum(PermissionRequiredMixin, UpdateView):
+class EditAlbum(LoginRequiredMixin, UpdateView):
     """Edit Album."""
-
-    permission_required = "imager_images.change_album"
 
     model = Album
     template_name = "imager_images/add_album.html"

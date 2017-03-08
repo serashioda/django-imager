@@ -1,10 +1,9 @@
 {% extends 'imagersite/base.html' %}
-{% block title %}Upload Photo{% endblock %}
+{% block title %}Add/Edit Photo{% endblock %}
 
 {% block content %}
 
-
-<h1>Upload Photo</h1>
+<h1>Add or Edit a Photo</h1>
 
 <form method="POST" enctype="multipart/form-data">
 {% csrf_token %}

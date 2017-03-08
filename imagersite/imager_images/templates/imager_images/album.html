@@ -14,6 +14,11 @@
     <a href="/images/photos/{{ photo.id }}/"><img class="col-xs-4" src="{{ photo.image.url }}"></a>
   {% endfor %}
 {% endif %}
+<br/>
+<h2>Tags Used</h2>
+  {% for tag in tags %}
+    <a href="{% url "tag_list" tag.slug %}">{{ tag.name }}</a>
+  {% endfor %}
 
 
 {% endblock %}
