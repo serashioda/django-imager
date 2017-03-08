@@ -30,6 +30,12 @@
         {% if photos.has_next %}
             <a href="?photo_page={{ photos.next_page_number }}">next</a>
         {% endif %}
+
+        <br/>
+        <b>Results Per Page: </b>
+        {% for x in limit_options %}
+            <a href="?page_size={{ x }}">{{ x }}</a>,
+        {% endfor %}
     </span>
 </div>
 </h2>

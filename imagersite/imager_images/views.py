@@ -25,6 +25,20 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # from django.shortcuts import render
 from imager_images.models import Photo, Album
 
+LIMIT_OPTIONS = [2, 4, 6, 10]
+
+def get_page_size(request):
+    page_size = 4
+
+    if request.GET.get('page_size') is not None:
+        page_size = int(request.GET.get('page_size'))
+        request.session['page_size'] = page_size
+
+    elif request.session.get('page_size') is not None:
+        page_size = request.session.get('page_size')
+
+    return page_size
+
 
 class AlbumView(ListView):
     """Album View."""
@@ -35,6 +49,8 @@ class AlbumView(ListView):
     def get_context_data(self):
         """."""
         album = Album.objects.get(id=self.kwargs['album_id'])
+
+        page_size = get_page_size(self.request)
 
         if album.published == 'private' and album.user.username != self.request.user.username:
             return HttpResponse('Unauthorized, status=401')
@@ -47,7 +63,7 @@ class AlbumView(ListView):
                     tags.append(tag)
 
         photo_list = all_album_photos
-        p_paginator = Paginator(photo_list, 4)
+        p_paginator = Paginator(photo_list, page_size)
         p_page = self.request.GET.get('photo_page')
 
         try:
@@ -57,7 +73,7 @@ class AlbumView(ListView):
         except EmptyPage:
             photo_page = p_paginator.page(p_paginator.num_pages)
 
-        return {'album': album, 'photos': photo_page, 'tags': tags}
+        return {'album': album, 'photos': photo_page, 'tags': tags, 'limit_options': LIMIT_OPTIONS}
 
 
 class PhotoView(ListView):
@@ -133,8 +149,10 @@ class LibraryView(ListView):
         photos = user.photos.all().order_by('-id')
         tag_list = Photo.tags.all()
 
+        page_size = get_page_size(self.request)
+
         photo_list = Photo.objects.all()
-        p_paginator = Paginator(photo_list, 4)
+        p_paginator = Paginator(photo_list, page_size)
         p_page = self.request.GET.get('photo_page')
 
         try:
@@ -145,7 +163,7 @@ class LibraryView(ListView):
             photo_page = p_paginator.page(p_paginator.num_pages)
 
         album_list = Album.objects.all()
-        a_paginator = Paginator(album_list, 4)
+        a_paginator = Paginator(album_list, page_size)
         a_page = self.request.GET.get('album_page')
 
         try:
@@ -155,7 +173,7 @@ class LibraryView(ListView):
         except EmptyPage:
             album_page = a_paginator.page(a_paginator.num_pages)
 
-        return {"albums": album_page, "photos": photo_page, "tags": tag_list}
+        return {"albums": album_page, "photos": photo_page, "tags": tag_list, 'limit_options': LIMIT_OPTIONS}
 
         # return {'photos': photos, 'albums': albums, 'tags': tag_list}
 

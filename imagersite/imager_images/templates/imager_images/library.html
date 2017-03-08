@@ -40,6 +40,7 @@
     </span>
 </div>
 
+
 <h2>Photos</h2>
 
 <a href="/images/photos/add">
@@ -72,6 +73,14 @@
     </span>
 </div>
 
+
+<br/>
+<h2>
+<b>Results Per Page: </b>
+{% for x in limit_options %}
+    <a href="?page_size={{ x }}">{{ x }}</a>,
+{% endfor %}
+</h2>
 
 {% endif %}
 {% endblock %}
