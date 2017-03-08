@@ -10,7 +10,8 @@ from imager_images.views import(
     AddPhoto,
     EditAlbum,
     EditPhoto,
-    TagListView
+    TagListView,
+    #PublicPhotosView
 )
 
 urlpatterns = [
@@ -24,4 +25,6 @@ urlpatterns = [
     url(r'^albums/$', AlbumCollectionView.as_view(), name='list_albums'),
     url(r'^photos/$', PhotoCollectionView.as_view(), name='list_photos'),
     url(r'^tagged/(?P<tag>[-\w]+)/$', TagListView.as_view(), name='tag_list'),
+    #url(r'^public_photos/$', PublicPhotosView.as_view(), name='public_photos'),
+
 ]

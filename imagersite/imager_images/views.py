@@ -1,4 +1,10 @@
 """Views for images."""
+from django.core.paginator import(
+    Paginator,
+    EmptyPage,
+    PageNotAnInteger
+)
+
 from django.http import HttpResponse
 # from django.http import HttpResponseRedirect
 # from django.http import HttpResponseForbidden
@@ -114,7 +120,32 @@ class LibraryView(ListView):
         albums = user.albums.all().order_by('-id')
         photos = user.photos.all().order_by('-id')
         tag_list = Photo.tags.all()
-        return {'photos': photos, 'albums': albums, 'tags': tag_list}
+
+        photo_list = Photo.objects.all()
+        p_paginator = Paginator(photo_list, 4)
+        p_page = self.request.GET.get('photo_page')
+
+        try:
+            photo_page = p_paginator.page(p_page)
+        except PageNotAnInteger:
+            photo_page = p_paginator.page(1)
+        except EmptyPage:
+            photo_page = p_paginator.page(p_paginator.num_pages)
+
+        album_list = Album.objects.all()
+        a_paginator = Paginator(album_list, 4)
+        a_page = self.request.GET.get('album_page')
+
+        try:
+            album_page = a_paginator.page(a_page)
+        except PageNotAnInteger:
+            album_page = a_paginator.page(1)
+        except EmptyPage:
+            album_page = a_paginator.page(a_paginator.num_pages)
+
+        return {"albums": album_page, "photos": photo_page, "tags": tag_list}
+
+        # return {'photos': photos, 'albums': albums, 'tags': tag_list}
 
     def get_queryset(self):
         """."""
