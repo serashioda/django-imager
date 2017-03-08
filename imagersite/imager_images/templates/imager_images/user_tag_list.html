@@ -1,0 +1,15 @@
+{% extends 'imagersite/base.html' %}
+
+{% block title %}Tagged Photos{% endblock %}
+
+{% block content %}
+    <h3>{{ user.username }}</h3>
+    <h2>Photos tagged: "{{ tag }}"</h2>
+    <div class="stacks">
+    {% for photo in photos %}
+      <a href="{{ photo.id }}">
+        <img class="stacks" src="/images/{{ photo.image.url }}">{{ photo.title }}
+      </a>
+    {% endfor %}
+    </div>
+{% endblock %}

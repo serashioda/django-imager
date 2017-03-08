@@ -6,12 +6,17 @@ from django.http import HttpResponse
 from django.urls import reverse_lazy
 
 from django.views.generic.edit import CreateView
-from django.views.generic import ListView, TemplateView, CreateView, UpdateView
+from django.views.generic import(
+    ListView,
+    # TemplateView,
+    # CreateView,
+    UpdateView
+)
 
-from django.contrib.auth.decorators import login_required
+# from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from django.shortcuts import render
+# from django.shortcuts import render
 from imager_images.models import Photo, Album
 
 
@@ -24,6 +29,7 @@ class AlbumView(ListView):
     def get_context_data(self):
         """."""
         album = Album.objects.get(id=self.kwargs['album_id'])
+
         if album.published == 'private' and album.user.username != self.request.user.username:
             return HttpResponse('Unauthorized, status=401')
 
@@ -43,8 +49,14 @@ class PhotoView(ListView):
     template_name = 'imager_images/photo.html'
 
     def get_context_data(self):
-        """."""
-        photo = Photo.objects.get(id=self.kwargs['photo_id'])
+        """Group photos with common tags."""
+        photo = Photo.objects.get(id=self.kwargs.get('photo_id'))
+
+        common_tag_photos = Photo.objects.filter(
+            tags__in=photo.tags.all()
+        ).exclude(
+            id=self.kwargs.get("photo_id")
+        ).distinct()
 
         if photo.published == 'private' and photo.user.username != self.request.user.username:
             return HttpResponse('Unauthorized, status=401')
@@ -98,9 +110,11 @@ class LibraryView(ListView):
 
     def get_context_data(self):
         """Library view."""
-        albums = self.request.user.albums.all().order_by('-id')
-        photos = self.request.user.photos.all().order_by('-id')
-        return {'photos': photos, 'albums': albums}
+        user = self.request.user
+        albums = user.albums.all().order_by('-id')
+        photos = user.photos.all().order_by('-id')
+        tag_list = Photo.tags.all()
+        return {'photos': photos, 'albums': albums, 'tags': tag_list}
 
     def get_queryset(self):
         """."""
@@ -112,9 +126,8 @@ class AddPhoto(LoginRequiredMixin, CreateView):
 
     login_url = reverse_lazy('login')
 
+    template_name = "imager_images/add_photo.html"
     model = Photo
-
-    # template_name = "imager_images/add_photo.html"
 
     fields = ['image', 'title', 'description', 'published', 'tags']
     success_url = reverse_lazy('library')
@@ -138,13 +151,11 @@ class EditPhoto(LoginRequiredMixin, UpdateView):
 class AddAlbum(LoginRequiredMixin, CreateView):
     """Add album."""
 
-    # login_url = reverse_lazy('login')
-
     template_name = "imager_images/add_album.html"
     model = Album
-
     fields = ['cover', 'title', 'description', 'photos', 'published']
     success_url = reverse_lazy('library')
+    # login_url = reverse_lazy('login')
 
     def form_valid(self, form):
         """Form validation for adding album."""
@@ -155,8 +166,26 @@ class AddAlbum(LoginRequiredMixin, CreateView):
 class EditAlbum(LoginRequiredMixin, UpdateView):
     """Edit Album."""
 
-    model = Album
     template_name = "imager_images/add_album.html"
+    model = Album
 
-    fields = ['title', "cover", "description", "photos"]
+    fields = ['title', 'cover', 'description', 'photos']
     success_url = reverse_lazy('library')
+
+
+class TagListView(ListView):
+    """Listing for tagged photos."""
+
+    template_name = 'imager_images/user_tag_list.html'
+    slug_field_name = 'tag'
+
+    def get_queryset(self):
+        """."""
+        return Photo.objects.filter(tags__slug=self.kwargs.get('slug')).all()
+
+    def get_context_data(self, **kwargs):
+        """."""
+        context = super(TagListView, self).get_context_data(**kwargs)
+        context['tag'] = self.kwargs.get('slug')
+        context['photos'] = Photo.objects.filter(tags__slug=self.kwargs.get('slug')).all()
+        return context

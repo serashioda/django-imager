@@ -23,5 +23,5 @@ urlpatterns = [
     url(r'^albums/add/$', AddAlbum.as_view(), name='add_album'),
     url(r'^albums/$', AlbumCollectionView.as_view(), name='list_albums'),
     url(r'^photos/$', PhotoCollectionView.as_view(), name='list_photos'),
-    url(r'^tagged/(?P<tag>[\w-]+)/$', TagListView.as_view(), name='tag_list')
+    url(r'^tagged/(?P<tag>[-\w]+)/$', TagListView.as_view(), name='tag_list'),
 ]

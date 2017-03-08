@@ -24,6 +24,6 @@ script:
 branches:
   only:
   - pagination
-  
+
 after_success:
   - coveralls
