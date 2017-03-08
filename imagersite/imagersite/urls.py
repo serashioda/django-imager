@@ -15,6 +15,7 @@ from imagersite import views
 # router.register(r'photos', views.APIUserPhotoListView, base_name="photos")
 
 urlpatterns = [
+    url('', include('social_django.urls', namespace='social')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', views.home_view, name='home'),
     url(r'^registration/', include('registration.backends.hmac.urls')),

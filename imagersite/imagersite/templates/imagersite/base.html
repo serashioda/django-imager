@@ -28,6 +28,7 @@
           {% endif %}
         </div>
         <nav class="row">
+          <a href="{% url "social:begin" "github" %}">LOGIN GITHUB</a>
           {% if user.is_authenticated %}
           <a href="{% url 'logout' %}">
             <button class="btn btn-lg btn-info btn-register">

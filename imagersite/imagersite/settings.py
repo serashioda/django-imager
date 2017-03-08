@@ -56,7 +56,8 @@ INSTALLED_APPS = [
     'django_otp.plugins.otp_totp',
     'taggit',
     'rest_framework',
-    'imager_api.apps.ImagerApiConfig'
+    'imager_api.apps.ImagerApiConfig',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -147,6 +148,17 @@ USE_L10N = True
 
 USE_TZ = True
 
+SOCIAL_AUTH_GITHUB_KEY = '212435ace978e43c46e7'
+SOCIAL_AUTH_GITHUB_SECRET = 'd31e468237d1844999dc2b3d2c0b7c716be1c2e3'
+SOCIAL_AUTH_GITHUB_SCOPE = ['user:email']
+
+SOCIAL_AUTH_AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2'
+)
+AUTHENTICATION_BACKENDS = (
+'social_core.backends.github.GithubOAuth2',
+'django.contrib.auth.backends.ModelBackend',
+)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
