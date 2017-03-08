@@ -6,8 +6,11 @@
 <img class="bigphoto" src="{{ photo.image.url }}" />
 
 
-<h4>{{ photo.title }}</h4>
 <p>Description: {{ photo.description }}
+<br />Tags: 
+{% for tag in photo.tags.all %}
+    <a href="{% url "tag_list" tag.slug %}">{{ tag.name }}</a>
+{% endfor %}
 <br />Date Uploaded: {{ photo.date_uploaded }}
 <br />Date Last Modified: {{ photo.date_modified }}
 <br />{{ photo.published }}
@@ -15,4 +18,12 @@
 <br />Date Published: {{ photo.date_published }}
 </p>
 {% endif %}
+
+<h2>Photos With Similar Tags</h2>
+{% for p in tag_photos %}
+<a href="/images/photos/{{ photo.id }}">
+    <img src='{{ photo.image.url }}' width="100px"/> 
+</a>
+{% endfor %}
+
 {% endblock %}
