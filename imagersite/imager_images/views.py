@@ -40,12 +40,24 @@ class AlbumView(ListView):
             return HttpResponse('Unauthorized, status=401')
 
         tags = []
-        for p in album.photos.all():
+        all_album_photos = album.photos.all()
+        for p in all_album_photos:
             for tag in p.tags.all():
                 if tag not in tags:
                     tags.append(tag)
 
-        return {'album': album, 'tags': tags}
+        photo_list = all_album_photos
+        p_paginator = Paginator(photo_list, 4)
+        p_page = self.request.GET.get('photo_page')
+
+        try:
+            photo_page = p_paginator.page(p_page)
+        except PageNotAnInteger:
+            photo_page = p_paginator.page(1)
+        except EmptyPage:
+            photo_page = p_paginator.page(p_paginator.num_pages)
+
+        return {'album': album, 'photos': photo_page, 'tags': tags}
 
 
 class PhotoView(ListView):
