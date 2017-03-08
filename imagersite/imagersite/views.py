@@ -1,4 +1,4 @@
-"""Views."""
+"""Imager Profile Views."""
 
 from django.shortcuts import render
 from imager_images.models import Photo
