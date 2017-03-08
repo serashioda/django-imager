@@ -48,7 +48,7 @@ class PhotoView(ListView):
 
         if photo.published == 'private' and photo.user.username != self.request.user.username:
             return HttpResponse('Unauthorized, status=401')
-        return {'photo': photo, 'tag_photos': context['tag_photos']}
+        return {'photo': photo, 'tag_photos': common_tag_photos[:5]}
 
 
 class PhotoCollectionView(ListView):
