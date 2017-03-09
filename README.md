@@ -8,7 +8,7 @@ A simple image management app built on Django.
 by [Sera Smith](https://github.com/serashioda) and [Ben Petty](https://github.com/benpetty)
 
 ## Link
-[Deploy Site:](http://ec2-54-218-75-89.us-west-2.compute.amazonaws.com/images/photos/1/)
+[Deployed Site](http://ec2-54-218-75-89.us-west-2.compute.amazonaws.com)
 
 
 
