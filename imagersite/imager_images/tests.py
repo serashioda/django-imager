@@ -179,11 +179,14 @@ class PhotoTestCase(TestCase):
         photo = Photo()
         photo.user = user
         photo.save()
+        photo.tags.add('meow', 'mix', 'bacon')
 
         album = Album()
         album.title = 'rock'
         album.cover = photo
         album.user = user
+        album.save()
+        album.photos.add(photo)
         album.save()
 
         response = self.client.get(reverse('show_album', kwargs={'album_id': album.id}))
@@ -221,6 +224,3 @@ class PhotoTestCase(TestCase):
 
         response = self.client.get(reverse('library'))
         assert(response.status_code == 200)
-
-
-# =========================================================================== #
