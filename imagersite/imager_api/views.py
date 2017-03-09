@@ -1,21 +1,19 @@
 """Views for imager_api."""
-
 from django.contrib.auth.models import User
 from django.core import serializers
 import json
 from imager_images.models import Photo, Album
-from imager_api.serializers import PhotoSerializer
 from rest_framework import mixins
 from rest_framework import generics
 from django.http import HttpResponse
 from django.conf import settings
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
 
 
 class APIUserPhotoListView(mixins.ListModelMixin, generics.GenericAPIView):
     """Class based view to return list of photos for a user."""
+
     authentication_classes = (SessionAuthentication, BasicAuthentication)
     permission_classes = (IsAuthenticated,)
 
@@ -35,6 +33,7 @@ class APIUserPhotoListView(mixins.ListModelMixin, generics.GenericAPIView):
 
 class APIUserAlbumListView(mixins.ListModelMixin, generics.GenericAPIView):
     """Class based view to return list of photos for a user."""
+
     authentication_classes = (SessionAuthentication, BasicAuthentication)
     permission_classes = (IsAuthenticated,)
 
@@ -64,6 +63,7 @@ class APIUserAlbumListView(mixins.ListModelMixin, generics.GenericAPIView):
 
 class APIAlbumPhotosView(mixins.ListModelMixin, generics.GenericAPIView):
     """Class based view to return list of photos for a user."""
+
     authentication_classes = (SessionAuthentication, BasicAuthentication)
     permission_classes = (IsAuthenticated,)
 
@@ -75,7 +75,7 @@ class APIAlbumPhotosView(mixins.ListModelMixin, generics.GenericAPIView):
             return HttpResponse("[]", content_type="application/json")
 
         try:
-            album = Album.objects.get(id=id,user=user)
+            album = Album.objects.get(id=id, user=user)
         except:
             return HttpResponse("[]", content_type="application/json")
 

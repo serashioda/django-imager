@@ -1,6 +1,6 @@
 """Tests for imager_images app."""
 from django.test import TestCase
-from imager_images.views import *
+from imager_images.views import get_page_size
 from imager_images.models import Photo, Album
 from imager_profile.tests import UserFactory
 from django.contrib.auth.models import User
@@ -117,8 +117,58 @@ class PhotoTestCase(TestCase):
         request = RequestFactory()
         request.session['page_size'] = 10
         size = get_page_size(request)
-        print(size)
         assert(size == 10)
+
+    def test_photo_collection_view(self):
+        """Test photo collection view."""
+        user = User()
+        user.username = 'billybob'
+        user.save()
+
+        for i in range(0, 10):
+            photo = Photo()
+            photo.user = user
+            photo.image = SimpleUploadedFile(name='test_image.jpg', content=open('imagersite/static/images/bob.jpg', 'rb').read(), content_type='image/jpeg')
+            photo.save()
+        response = self.client.get(reverse('list_photos'))
+        assert(response.status_code == 200)
+
+    def test_album_collection_view(self):
+        """Test photo collection view."""
+        user = User()
+        user.username = 'billybob'
+        user.save()
+
+        photo = Photo()
+        photo.user = user
+        photo.image = SimpleUploadedFile(name='test_image.jpg', content=open('imagersite/static/images/bob.jpg', 'rb').read(), content_type='image/jpeg')
+        photo.save()
+
+        for i in range(0, 10):
+            album = Album()
+            album.user = user
+            album.cover = photo
+            album.save()
+
+        response = self.client.get(reverse('list_albums'))
+        assert(response.status_code == 200)
+
+    def test_tag_collection_view(self):
+        """Test tag collection view."""
+        user = User()
+        user.username = 'billybob'
+        user.save()
+
+        for i in range(0, 10):
+            photo = Photo()
+            photo.user = user
+            photo.image = SimpleUploadedFile(name='test_image.jpg', content=open('imagersite/static/images/bob.jpg', 'rb').read(), content_type='image/jpeg')
+            photo.save()
+            photo.tags.add('bar')
+            photo.save()
+
+        response = self.client.get(reverse('tag_list', kwargs={'tag': 'bar'}))
+        assert(response.status_code == 200)
 
     def test_album_view(self):
         """Test that the album view doesn't explode."""
