@@ -33,7 +33,6 @@ def get_page_size(request):
     if request.GET.get('page_size') is not None:
         page_size = int(request.GET.get('page_size'))
         request.session['page_size'] = page_size
-
     elif request.session.get('page_size') is not None:
         page_size = request.session.get('page_size')
 

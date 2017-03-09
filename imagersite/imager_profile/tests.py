@@ -71,14 +71,14 @@ class ProfileTestCase(TestCase):
 
     def test_update_profile(self):
         """Test that a profile update also updates db."""
-        # self.users[0].profile.bio = "This is mo betta."
-        # query = User.objects.first()
-        # self.assertTrue(
-        #     query.profile.bio == "This is mo betta.")
-        pass
+        this_user = self.users[0]
+        this_user.profile.bio = "This is my new bio."
+        this_user.profile.save()
+        query = User.objects.first()
+        self.assertTrue(query.profile.bio == "This is my new bio.")
 
-    def test_inactive_users_have_inactive(self):
-        """."""
+    def test_inactive_users_have_inactive_status(self):
+        """Test that inactive user is False for is_active."""
         this_user = self.users[0]
         this_user.is_active = False
         this_user.save()
@@ -97,13 +97,13 @@ class ProfileTestCase(TestCase):
             user = str(self.users[i])
             self.assertTrue('Bob', '@imager.com' in user)
 
-    def test_profile_is_active(self):
+    def test_user_is_active(self):
         """Test profile.is_active is active."""
         for i in range(20):
             user = self.users[i]
             self.assertTrue(user.is_active)
 
-    def test_string_returns_profile_info(self):
+    def test_string_returns_correct_profile_info(self):
         """Test if the string method returns matching profile info."""
         for i in range(20):
             user = str(self.users[i])
@@ -144,7 +144,6 @@ class ProfileFrontEndTests(TestCase):
         new_user.username = "potato_joe"
         new_user.set_password("tugboats")
         new_user.save()
-        # import pdb; pdb.set_trace()
         response = self.client.post("/login/", {
             "username": new_user.username,
             "password": "tugboats"
@@ -157,7 +156,6 @@ class ProfileFrontEndTests(TestCase):
         new_user.username = "potato_joe"
         new_user.set_password("tugboats")
         new_user.save()
-        # import pdb; pdb.set_trace()
         response = self.client.post("/login/", {
             "username": new_user.username,
             "password": "tugboats"
