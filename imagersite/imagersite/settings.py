@@ -65,7 +65,7 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 # Tell nose to measure coverage on the 'foo' and 'bar' apps
 NOSE_ARGS = [
     '--with-coverage',
-    '--cover-package=imagersite,imager_profile,imager_images,imager_api',
+    '--cover-package=imagersite,imager_profile,imager_images',
 ]
 
 MIDDLEWARE = [
