@@ -1,7 +1,5 @@
 """Views for images."""
 from django.http import HttpResponse
-# from django.http import HttpResponseRedirect
-# from django.http import HttpResponseForbidden
 
 from django.urls import reverse_lazy
 
@@ -9,7 +7,7 @@ from django.views.generic.edit import CreateView
 from django.views.generic import ListView, TemplateView, CreateView, UpdateView
 
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.shortcuts import render
 from imager_images.models import Photo, Album
@@ -22,9 +20,9 @@ class AlbumView(ListView):
     template_name = 'imager_images/album.html'
 
     def get_context_data(self):
-        """."""
+        """Get private album objects for AlbumView."""
         album = Album.objects.get(id=self.kwargs['album_id'])
-        if album.published == 'private' and album.user.username != request.user.username:
+        if album.published == 'private' and album.user.username != self.request.user.username:
             return HttpResponse('Unauthorized, status=401')
         return {'album': album}
 
@@ -36,7 +34,7 @@ class PhotoView(ListView):
     template_name = 'imager_images/photo.html'
 
     def get_context_data(self):
-        """."""
+        """Get private photo objects for PhotoView."""
         photo = Photo.objects.get(id=self.kwargs['photo_id'])
 
         if photo.published == 'private' and photo.user.username != self.request.user.username:
@@ -50,7 +48,7 @@ class PhotoCollectionView(ListView):
     template_name = 'imager_images/photos.html'
 
     def get_context_data(self):
-        """."""
+        """Get public photo objects for PhotoCollectionView."""
         public_photos = []
         photos = Photo.objects.all().order_by('-id')
         for photo in photos:
@@ -69,7 +67,7 @@ class AlbumCollectionView(ListView):
     template_name = 'imager_images/albums.html'
 
     def get_context_data(self):
-        """."""
+        """Get public album objects for AlbumCollectionView."""
         public_albums = []
         albums = Album.objects.all()
         for album in albums:
@@ -90,7 +88,7 @@ class LibraryView(ListView):
     template_name = 'imager_images/library.html'
 
     def get_context_data(self):
-        """Library view."""
+        """Get album and photo objects for LibraryView."""
         albums = self.request.user.albums.all().order_by('-id')
         photos = self.request.user.photos.all().order_by('-id')
         return {'photos': photos, 'albums': albums}
@@ -100,17 +98,17 @@ class LibraryView(ListView):
         return {}
 
 
-class AddPhoto(PermissionRequiredMixin, CreateView):
+class AddPhoto(LoginRequiredMixin, CreateView):
     """Add photo."""
 
     login_url = reverse_lazy('login')
-    permission_required = "imager_images.add_photo"
 
     model = Photo
+
     template_name = "imager_images/add_photo.html"
 
     fields = ['image', 'title', 'description', 'published']
-    success_url = reverse_lazy('imager_images: library')
+    success_url = reverse_lazy('library')
 
     def form_valid(self, form):
         """Form validation for adding a photo."""
@@ -118,23 +116,22 @@ class AddPhoto(PermissionRequiredMixin, CreateView):
         return super(AddPhoto, self).form_valid(form)
 
 
-class EditPhoto(PermissionRequiredMixin, UpdateView):
+class EditPhoto(LoginRequiredMixin, UpdateView):
     """Edit photo."""
 
-    permission_required = "imager_images.change_photo"
-
     model = Photo
+
     template_name = "imager_images/add_photo.html"
 
     fields = ['image', 'title', 'description']
+
     success_url = reverse_lazy('library')
 
 
-class AddAlbum(PermissionRequiredMixin, CreateView):
+class AddAlbum(LoginRequiredMixin, CreateView):
     """Add album."""
 
     login_url = reverse_lazy('login')
-    permission_required = "imager_images.add_album"
 
     model = Album
     template_name = "imager_images/add_album.html"
@@ -148,10 +145,22 @@ class AddAlbum(PermissionRequiredMixin, CreateView):
         return super(AddAlbum, self).form_valid(form)
 
 
-class EditAlbum(PermissionRequiredMixin, UpdateView):
-    """Edit Album."""
+class AddAlbum(LoginRequiredMixin, CreateView):
+    """Add Album."""
 
-    permission_required = "imager_images.change_album"
+    template_name = "imager_images/add_album.html"
+    model = Album
+    fields = ['title', "cover", "description", "photos", "published"]
+    success_url = reverse_lazy('library')
+
+    def form_valid(self, form):
+        """Make the form user instance the current user."""
+        form.instance.user = self.request.user
+        return super(AddAlbum, self).form_valid(form)
+
+
+class EditAlbum(LoginRequiredMixin, UpdateView):
+    """Edit Album."""
 
     model = Album
     template_name = "imager_images/add_album.html"

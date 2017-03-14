@@ -1,11 +1,16 @@
 
-[![Build Status](https://travis-ci.org/serashioda/django-imager.svg?branch=front-end-4)](https://travis-ci.org/serashioda/django-imager) [![Coverage Status](https://coveralls.io/repos/github/serashioda/django-imager/badge.svg?branch=front-end-4)](https://coveralls.io/github/serashioda/django-imager?branch=front-end-4)
+[![Build Status](https://travis-ci.org/serashioda/django-imager.svg?branch=deployment)](https://travis-ci.org/serashioda/django-imager) [![Coverage Status](https://coveralls.io/repos/github/serashioda/django-imager/badge.svg?branch=deployment)](https://coveralls.io/github/serashioda/django-imager?branch=deployment)
 
 # Django Imager
 
 A simple image management app built on Django.
 
 by [Sera Smith](https://github.com/serashioda) and [Ben Petty](https://github.com/benpetty)
+
+## Link
+[Deployed Site](http://ec2-54-218-75-89.us-west-2.compute.amazonaws.com)
+
+
 
 ## Tools
 
